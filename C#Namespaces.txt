@@ -1,0 +1,40 @@
+using System;
+//A namespace is designed for providing a way to keep one set of names separate from another.
+//The class names declared in one namespace does not conflict with the same class names declared in another.
+namespace MyNamespace
+{
+    public class SampleClass
+    {
+        public static void myMethod()
+        {
+            Console.WriteLine("Creating my namespace");
+        }
+    }
+}
+
+// Nested Namespace
+namespace MyNamespace1
+{
+    namespace Nested
+    {
+        public class SampleClass
+        {
+            public static void myMethod1()
+            {
+                Console.WriteLine("Nested Namespace Example");
+            }
+        }
+    }
+}
+
+namespace MyProgram
+{
+    public class MyClass
+    {
+        public static void Main()
+        {
+            MyNamespace.SampleClass.myMethod();
+            MyNamespace1.Nested.SampleClass.myMethod1();
+        }
+    }
+}

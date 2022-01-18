@@ -1,0 +1,94 @@
+﻿using System; //namespace
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)//first method which gets invoked whenever an application started(entry point)
+        {
+            //void-does not return anything
+            //string[] command line arguements of array type passed to the main()
+            //single line comment
+            Console.WriteLine("OOPS");
+            Console.WriteLine("Web,Windows,mobile,Web services,DB");
+
+            Console.WriteLine("Hello, Welcome to Csharp");
+            Console.WriteLine("DATATYPES");
+            string name = "Peter";
+            Console.WriteLine(name);
+
+            int c = 3 + 7;
+            Console.WriteLine("c:"+c);
+
+            double d = 6.89D;
+            Char a = 'P';
+            bool b = true;
+            Console.WriteLine("Double:"+d);
+            Console.WriteLine("Character:"+ a);
+            Console.WriteLine("boolean:"+b);
+
+            double one = 6.75;
+            int two = (int)one;
+            Console.WriteLine("Explicit Typecast:" + one);
+            Console.WriteLine(two);
+
+            Console.WriteLine("Type Conversion:"+Convert.ToInt32(one));
+
+            Console.WriteLine("USER INPUT");
+            Console.WriteLine("STUDENT DETAILS");
+            Console.WriteLine("ENTER NAME:");
+            string un = Console.ReadLine();
+            Console.WriteLine("ENTER AGE");
+            int age =Convert.ToInt32( Console.ReadLine());
+            Console.WriteLine("NAME:" + un);
+            Console.WriteLine("AGE:" + age);
+
+
+            Console.WriteLine("OPERATORS");
+            int sum = 10 + 20;
+            int sub = 50 - 30;
+            int mul = 3 * 5;
+            int div = 8 / 2;
+            int mod = 7 % 2;
+            Console.WriteLine("addition:" + sum);
+            Console.WriteLine("subtraction:" + sub);
+            Console.WriteLine("multiplication:" + mul);
+            Console.WriteLine("division:" + div);
+            Console.WriteLine("modulus:" + mod);
+            int i = 5;
+            Console.WriteLine("post increment:" + i++);
+            Console.WriteLine("pre increment" + (++i));
+            int dec= 6;
+            Console.WriteLine("post decrement:" + dec--);
+            Console.WriteLine("pre decrement:" + (--dec));
+
+            int l = 30;
+            Console.Write("Logical AND:");
+            Console.WriteLine( l>20 && l < 40);
+
+            Console.WriteLine("Math class");
+            Console.WriteLine(Math.Max(3,7));
+            Console.WriteLine(Math.Sqrt(9));
+            Console.WriteLine(Math.Abs(-5));
+            Console.WriteLine(Math.Round(4.789));
+            Console.WriteLine("STRING FUNCTIONS");
+            string str = "Sam";
+            string str1 = "Peter";
+            Console.WriteLine(str.ToLower());
+            Console.WriteLine(str.ToUpper());
+            Console.WriteLine(string.Concat(str, str1));
+            Console.WriteLine("STRING INTERPOLATION");
+            string str2 = $"My name is:{str} {str1}";
+            Console.WriteLine(str2);
+            Console.WriteLine(str[1]);
+            Console.WriteLine(str.IndexOf("a"));
+            string str3=str1.Substring(1,3);
+            Console.WriteLine(str3);
+            string str4="ESCAPE \\ \"\'CHARACTER\'\" \\";
+            Console.WriteLine(str4);
+
+            Console.Read();
+
+        }
+    }
+}

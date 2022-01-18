@@ -1,0 +1,136 @@
+Class
+-----------
+// C# program to illustrate the
+// concept of class
+using System;
+  
+// Class Declaration
+public class Author {
+  
+    // Data members of class
+    public string name;
+    public string language;
+    public int article_no;
+    public int improv_no;
+  
+    // Method of class
+    public void Details(string name, string language,
+                        int article_no, int improv_no)
+    {
+        this.name = name;
+        this.language = language;
+        this.article_no = article_no;
+        this.improv_no = improv_no;
+  
+        Console.WriteLine("The name of the author is :  " + name
+                          + "\nThe name of language is : " + language
+                          + "\nTotal number of article published  " 
+                          + article_no + "\nTotal number of Improvements:"
+                          +" done by author is : " + improv_no);
+    }
+  
+    // Main Method
+    public static void Main(String[] args)
+    {
+  
+        // Creating object
+        Author obj = new Author();
+  
+        // Calling method of class
+        // using class object
+        obj.Details("Ankita", "C#", 80, 50);
+    }
+}
+
+Struct
+--------
+// C# program to illustrate the
+// concept of structure
+using System;
+  
+// Defining structure
+public struct Car
+{
+  
+    // Declaring different data types
+    public string Brand;
+    public string Model;
+    public string Color;
+}
+  
+class GFG {
+  
+    // Main Method
+    static void Main(string[] args)
+    {
+  
+        // Declare c1 of type Car
+        // no need to create an 
+        // instance using 'new' keyword
+        Car c1;
+  
+        // c1's data
+        c1.Brand = "Bugatti";
+        c1.Model = "Bugatti Veyron EB 16.4";
+        c1.Color = "Gray";
+  
+        // Displaying the values
+        Console.WriteLine("Name of brand: " + c1.Brand + 
+                          "\nModel name: " + c1.Model + 
+                          "\nColor of car: " + c1.Color);
+    }
+}
+
+Struct with method
+-------------------
+using System;
+
+struct Books
+{
+    private string title;
+    private string author;
+    private string book_name;
+    private int book_id;
+
+    public void getValues(string t, string a, string s, int id)
+    {
+        title = t;
+        author = a;
+        book_name = s;
+        book_id = id;
+    }
+
+    public void display()
+    {
+        Console.WriteLine("Title : {0}", title);
+        Console.WriteLine("Author : {0}", author);
+        Console.WriteLine("Book_name : {0}", book_name);
+        Console.WriteLine("Book_id :{0}", book_id);
+    }
+};
+
+public class testStructure
+{
+
+    public static void Main(string[] args)
+    {
+        Books Book1 = new Books();   /* Declare Book1 of type Book */
+        Books Book2 = new Books();   /* Declare Book2 of type Book */
+
+        /* book 1 specification */
+        Book1.getValues("Novel",
+        "J. R. R. Tolkien", "The Lord of the Rings", 6495407);
+
+        /* book 2 specification */
+        Book2.getValues("Novel",
+        "J. K. Rowling", "Harry Potter", 6495700);
+
+        /* print Book1 info */
+        Book1.display();
+
+        /* print Book2 info */
+        Book2.display();
+
+        Console.ReadKey();
+    }
+}

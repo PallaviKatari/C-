@@ -1,0 +1,112 @@
+C# Reflection
+In C#, reflection is a process to get metadata of a type at runtime. 
+The System.Reflection namespace contains required classes for reflection such as:
+
+Type
+MemberInfo
+ConstructorInfo
+MethodInfo
+FieldInfo
+PropertyInfo
+TypeInfo
+EventInfo
+Module
+Assembly
+AssemblyName
+Pointer etc.
+
+The System.Reflection.Emit namespace contains classes to emit metadata.
+-------------------------------------------------------------------------
+using System;  
+public class ReflectionExample  
+{  
+//C# Reflection Example: Get Type
+   public static void Main()  
+    {  
+        int a = 10;  
+        Type type = a.GetType();  
+        Console.WriteLine(type);  
+    }  
+}  
+------------------------------------
+using System;  
+using System.Reflection;  
+public class ReflectionExample  
+{  
+//C# Reflection Example: Get Assembly
+   public static void Main()  
+    {  
+        Type t = typeof(System.String);  
+        Console.WriteLine(t.Assembly);   
+   }  
+}  
+------------------------------------
+using System;  
+using System.Reflection;  
+public class ReflectionExample  
+{  
+//C# Reflection Example: Print Type Information
+    public static void Main()  
+    {  
+        Type t = typeof(System.String);  
+        Console.WriteLine(t.FullName);  
+        Console.WriteLine(t.BaseType);  
+        Console.WriteLine(t.IsClass);  
+        Console.WriteLine(t.IsEnum);  
+        Console.WriteLine(t.IsInterface);  
+    }  
+} 
+-------------------------------------
+using System;  
+using System.Reflection;  
+public class ReflectionExample  
+{  
+//C# Reflection Example: Print Constructors
+    public static void Main()  
+    {  
+        Type t = typeof(System.String);  
+          
+        Console.WriteLine("Constructors of {0} type...", t);  
+        ConstructorInfo[] ci = t.GetConstructors(BindingFlags.Public | BindingFlags.Instance);  
+        foreach (ConstructorInfo c in ci)  
+        {  
+            Console.WriteLine(c);  
+        }  
+    }  
+}   
+--------------------------------------------
+using System;  
+using System.Reflection;  
+public class ReflectionExample  
+{  
+//C# Reflection Example: Print Methods
+    public static void Main()  
+    {  
+        Type t = typeof(System.String);  
+          
+        Console.WriteLine("Methods of {0} type...", t);  
+        MethodInfo[] ci = t.GetMethods(BindingFlags.Public | BindingFlags.Instance);  
+        foreach (MethodInfo m in ci)  
+        {  
+            Console.WriteLine(m);  
+        }  
+    }  
+}  
+-------------------------------------------
+using System;  
+using System.Reflection;  
+public class ReflectionExample  
+{  
+//C# Reflection Example: Print Fields
+    public static void Main()  
+    {  
+        Type t = typeof(System.String);  
+          
+        Console.WriteLine("Fields of {0} type...", t);  
+        FieldInfo[] ci = t.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic);  
+        foreach (FieldInfo f in ci)  
+        {  
+            Console.WriteLine(f);  
+        }  
+    }  
+}  

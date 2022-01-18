@@ -1,0 +1,100 @@
+C# - Partial Classes and Methods
+In C#, you can split the implementation of a class, a struct, a method, 
+or an interface in multiple .cs files using the partial keyword. 
+The compiler will combine all the implementation from multiple .cs files when the program is compiled.
+
+Rules for Partial Classes
+-------------------------------
+All the partial class definitions must be in the same assembly and namespace.
+All the parts must have the same accessibility like public or private, etc.
+If any part is declared abstract, sealed or base type then the whole class is declared of the same type.
+Different parts can have different base types and so the final class will inherit all the base types.
+The Partial modifier can only appear immediately before the keywords class, struct, or interface.
+Nested partial types are allowed.
+
+Partial Methods
+------------------------
+Partial classes or structs can contain a method that split into 
+two separate .cs files of the partial class or struct. 
+One of the two .cs files must contain a signature of the method, 
+and other file can contain an optional implementation of the partial method. 
+Both declaration and implementation of a method must have the partial keyword.
+
+Rules for Partial Methods
+----------------------------
+Partial methods must use the partial keyword and must return void.
+Partial methods can have in or ref but not out parameters.
+Partial methods are implicitly private methods, so cannot be virtual.
+Partial methods can be static methods.
+Partial methods can be generic.
+
+----------------------------------------------------------
+File1.cs
+-----------
+using System;
+
+namespace HeightWeightInfo
+{
+    class File1
+    {
+    }
+    public partial class Record
+    {
+        private int h;
+        private int w;
+        public Record(int h, int w)
+        {
+            this.h = h;
+            this.w = w;
+        }
+    }
+    public partial class Car
+    {
+        public partial void InitializeCar();
+        public void BuildRim() { }
+        public void BuildWheels() { }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Record myRecord = new Record(10, 15);
+            myRecord.PrintRecord();
+            Car c = new Car();
+            c.InitializeCar();
+            Console.ReadLine();
+        }
+    }
+}
+------------------------------
+File2.cs
+--------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HeightWeightInfo
+{
+    class File2
+    {
+    }
+    public partial class Car
+    {
+        public void BuildEngine() { }
+        public partial void InitializeCar()
+        {
+            string str = "Car";
+            Console.WriteLine(str);
+        }
+    }
+    public partial class Record
+    {
+        public void PrintRecord()
+        {
+            Console.WriteLine("Height:" + h);
+            Console.WriteLine("Weight:" + w);
+        }
+    }
+}

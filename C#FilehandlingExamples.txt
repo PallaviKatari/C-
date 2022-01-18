@@ -1,0 +1,209 @@
+using System;
+using System.IO;
+public class BinStream
+{
+    public BinStream()
+    {
+        Writerfunc();
+        Readerfunc();
+    }
+    public static void Main()
+    {
+        BinStream bs1 = new BinStream();
+        Console.ReadLine();
+    }
+    private void Writerfunc()
+    {
+        try
+        {
+            Console.Out.WriteLine("Let's get started ...");
+            //a FileStream is opened on the file "new"
+            FileStream fout1 = new FileStream("new.txt", FileMode.OpenOrCreate,
+            FileAccess.Write, FileShare.ReadWrite);
+            //a BinaryWriter is created from the FileStream
+            BinaryWriter bw1 = new BinaryWriter(fout1);
+            //arbitrary variables are created
+            string name1 = "Jancy";
+            int age1 = 28;
+            double height1 = 5.5;
+            bool single1 = true;
+            char gender1 = 'F';
+            //values are written to the file
+            bw1.Write(name1);
+            bw1.Write(age1);
+            bw1.Write(height1);
+            bw1.Write(single1);
+            bw1.Write(gender1);
+            //file and free resources are closed
+            bw1.Close();
+            Console.WriteLine("Data updated!");
+            Console.WriteLine();
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine("occurance of an input output exception :" + e);
+        }
+    }
+    private void Readerfunc()
+    {
+        try
+        {
+            Console.WriteLine("Lets get started to Read ...");
+            //FileStream is opened in Read mode
+            FileStream fin1 = new FileStream("new.txt", FileMode.Open,
+            FileAccess.Read, FileShare.ReadWrite);
+            //a BinaryReader is created from the FileStream
+            BinaryReader br1 = new BinaryReader(fin1);
+            //start of the file is searched
+            br1.BaseStream.Seek(0, SeekOrigin.Begin);
+            //the file is read and the values are stored to the variables
+            string name1 = br1.ReadString();
+            int age1 = br1.ReadInt32();
+            double height1 = br1.ReadDouble();
+            bool single1 = br1.ReadBoolean();
+            char gender1 = br1.ReadChar();
+            //the data is displayed on the console
+            Console.WriteLine("Your Name :" + name1);
+            Console.WriteLine("Your Age :" + age1);
+            Console.WriteLine("Your Height :" + height1);
+            Console.WriteLine("Are you Single? :" + single1);
+            Console.WriteLine("Your Gender M/F:" + gender1);
+            //stream is closed and the resources are freed
+            br1.Close();
+            Console.WriteLine("Read the data successfully!");
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine("occurance of an input output exception :" + e);
+        }
+    }
+}
+-----------------------------------------------------
+MemoryStream. This C# class represents a pure, in-memory stream of data. 
+It is found in the System.IO namespace. 
+It is derived from the Stream type.
+
+Type uses. MemoryStream is useful when using BinaryReader and other classes that can receive streams. 
+It can be reset—this leads to performance improvements.
+
+BufferedStream Class
+
+The BufferedStream class also extends the Stream class.
+Buffers, or cached blocks of data in memory, provide speed and stability to the process 
+of reading or writing because they prevent numerous calls to the operating system. 
+Buffered streams are used in conjunction with other streams to provide better read/write performance. 
+The BufferedStream class can be used to either read data or write data but it cannot be used to perform
+ both read and write operations together. The class has been optimized so that it maintains a suitable 
+buffer at all times. When a buffer is not required, instead of slowing down the process, 
+the class does not allocate any space in memory. File streams are already buffered and therefore 
+a buffered stream is generally used to buffer network streams used in networking applications.
+
+MemoryStream Class
+
+A memory stream is created from an array of unsigned bytes rather than from a file or other stream. 
+Memory streams are used as temporary, in-memory storage (temporary buffers) 
+in lieu of creating temporary files. This stream is highly optimized for speed since the data 
+is stored in memory and the processor can easily access it. Memory streams should be used to 
+store frequently accessed data.
+
+The Read and Write methods of the MemoryStream class read and write from an internal buffer
+that is created when the memory stream is created. The example shown in Listing 6.9 uses
+the MemoryStream class to add a custom signature at the end of the specified file.
+
+
+using System;
+using System.Diagnostics;
+using System.IO;
+public class Program
+{
+    public static void Main()
+    {
+        var check = Stopwatch.StartNew();
+        // buffer writes to a MemoryStream by using buffered stream.
+        using (MemoryStream memory = new MemoryStream())
+        using (BufferedStream stream = new BufferedStream(memory))
+        {
+            // a byte is written 5 million times.
+            for (int i = 0; i < 5000000; i++)
+            {
+                stream.WriteByte(5);
+            }
+        }
+        check.Stop();
+        Console.WriteLine("BUFFEREDSTREAM TIME: " + check.Elapsed.TotalMilliseconds);
+    }
+}
+---------------------------------------------
+using System;
+using System.IO;
+namespace CSharp
+{
+class Programcheck
+{
+static void Main(string[] args)
+{
+//directory name is provided along with complete location.   DirectoryInfo directory = new DirectoryInfo(@"C:\\Users\\shivakumarsh\\Desktop\\dir1");
+try
+{
+// A check is done to see if directory exists or no
+if (directory.Exists)
+{
+Console.WriteLine("A directory by this name already exists");
+return;
+}
+// a new directory is created.
+directory.Create();
+Console.WriteLine("New directory is created");
+}
+catch (Exception e)
+{
+Console.WriteLine("Directory cannot be created: {0}", e.ToString());
+}
+}
+}
+}
+---------------------------------------------------
+using System;
+using System.IO;
+namespace CSharp
+{
+    class Programcheck
+    {
+        static void Main(string[] args)
+        {
+            //directory name is provided along with complete location.
+            DirectoryInfo directory = new DirectoryInfo(@".\New");
+            try
+            {
+                // A check is done to see if directory exists or no
+                if (directory.Exists)
+                {
+                    Console.WriteLine("A directory by this name already exists");
+                    return;
+                }
+                // a new directory is created.
+                directory.Create();
+                Console.WriteLine("New directory is created");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Directory cannot be created: {0}", e.ToString());
+            }
+        }
+    }
+}
+------------------------------------------------
+using System;
+using System.IO;
+class Programcheck
+{
+static void Main()
+{
+//the drive names are printed.
+var drives1 = DriveInfo.GetDrives();
+foreach (DriveInfo info in drives1)
+{
+Console.WriteLine(info.Name);
+}
+}
+}

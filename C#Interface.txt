@@ -1,0 +1,88 @@
+﻿Interface, in C#, is a keyword, which holds a group of abstract methods and properties, which are to be implemented or used by an abstract or non-abstract class. 
+
+Defining the methods are properties inside an interface which makes them public and abstract by default.
+
+In simplest terms, An Interface is like a Contract, where every member or component included in the body has to follow the contract, it defines what must be done. 
+
+The interface does not contain any fields and is always defined by the use of the keyword “interface”.
+
+interface <name_for_interface>
+{
+//abstract methods
+//abstract properties.
+}
+
+Why do we need C# Interface?
+Basically we have understood that there is no specific functionality inside an interface, if it is so, then why do we need Interface?
+
+When to use Interface?
+
+Security: When we have to simply hide some features and have to use those later. 
+It is essential to hide a few details while only showing the details important to the user.
+Multiple Inheritance: In c#, one class can inherit from a simple parent class, inheriting all its features. 
+Multiple Inheritance is not supported in C# for the simple reason to not make C# complex. 
+But with the use of an interface, multiple interfaces can be implemented into a single class.
+
+using System;
+
+namespace Interface
+{
+    //An interface is a completely "abstract class", which can only contain abstract methods and properties (with empty bodies)
+    interface IFirstInterface
+    {
+        string Name { get; set; }
+        void myMethod(); // interface method
+    }
+
+    interface ISecondInterface
+    {
+        void myOtherMethod(); // interface method
+    }
+    interface IThirdInterface
+    {
+        void myOtherMethod1(); // interface method
+    }
+
+    // Implement multiple interfaces
+    class DemoClass : IFirstInterface, ISecondInterface, IThirdInterface
+    {
+        public string Name
+        {
+            get;
+            set;
+        }
+        public void myMethod()
+        {
+            Console.WriteLine("interface1 text..");
+            
+        }
+        public void myOtherMethod()
+        {
+            Console.WriteLine("Interface2 text..");
+        }
+        public void myOtherMethod1()
+        {
+            Console.WriteLine("Interface3 text..");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            DemoClass myObj = new DemoClass();
+            myObj.Name = "John Doe";
+            myObj.myMethod();
+            myObj.myOtherMethod();
+            myObj.myOtherMethod1();
+            Console.WriteLine(myObj.Name);
+        }
+    }
+}
+Advantages of C# Interface
+Below are some of the advantages given.
+
+One of the major advantages of Interface in C# is a better alternative to implement multiple inheritances.
+The interface enables the plug-and-play method.
+Complete Abstraction can be achieved by the implementation of Interface.
+Along with making our code easy to maintain, concept loose coupling can be achieved.

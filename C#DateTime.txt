@@ -1,0 +1,91 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		//C# includes DateTime struct to work with dates and times.
+
+		//assigns default value 01/01/0001 00:00:00
+		DateTime dt1 = new DateTime();
+		Console.WriteLine(dt1);
+
+		//assign year, month, day
+		DateTime dt2 = new DateTime(2015, 12, 31);
+		Console.WriteLine(dt2);
+
+		//assign year, month, day, hour, min, seconds
+		DateTime dt3 = new DateTime(2015, 12, 31, 5, 10, 20);
+		Console.WriteLine(dt3);
+
+		//assign year, month, day, hour, min, seconds, UTC timezone
+		DateTime dt4 = new DateTime(2015, 12, 31, 5, 10, 20, DateTimeKind.Utc);
+		Console.WriteLine(dt4);
+
+		//Ticks
+		//Ticks is a date and time expressed in the number of 100 - nanosecond intervals that have elapsed since January 1, 0001, at 00:00:00.000 in the Gregorian calendar.
+		 
+		DateTime dt = new DateTime(636370000000000000);
+		Console.WriteLine(dt);
+
+		Console.WriteLine(DateTime.MaxValue.Ticks);
+		Console.WriteLine(DateTime.MinValue.Ticks);
+
+		//DateTime Static Fields
+		//The DateTime struct includes static fields, properties, and methods.
+		
+		DateTime currentDateTime = DateTime.Now;
+		DateTime todaysDate = DateTime.Today;
+		DateTime currentDateTimeUTC = DateTime.UtcNow;
+
+		DateTime maxDateTimeValue = DateTime.MaxValue;
+		DateTime minDateTimeValue = DateTime.MinValue;
+
+		Console.WriteLine($"Current DateTime {currentDateTime}");
+		Console.WriteLine($"Today's DateTime {todaysDate}");
+		Console.WriteLine($"Current DateTime UTC Timezone {currentDateTimeUTC}");
+		Console.WriteLine($"Max DateTime Value {maxDateTimeValue}");
+		Console.WriteLine($"Min DateTime Value {minDateTimeValue}");
+
+		DateTime dt5 = new DateTime(2015, 12, 31);
+		TimeSpan ts = new TimeSpan(25, 20, 55);
+
+		DateTime newDate = dt5.Add(ts);
+
+		Console.WriteLine(newDate);
+
+		DateTime dt6 = new DateTime(2015, 12, 31);
+		DateTime dt7 = new DateTime(2016, 2, 2);
+		TimeSpan result = dt7.Subtract(dt6);
+		Console.WriteLine(result);
+
+		//The DateTime struct overloads +, -, ==, !=, >, <, <=, >= operators to ease out addition, subtraction, and comparison of dates. These make it easy to work with dates.
+		DateTime dt8 = new DateTime(2015, 12, 20);
+		DateTime dt9 = new DateTime(2016, 12, 31, 5, 10, 20);
+		TimeSpan time = new TimeSpan(10, 5, 25, 50);
+
+		Console.WriteLine(dt9 + time);
+		Console.WriteLine(dt9 - dt8);
+		Console.WriteLine(dt8 == dt9);
+		Console.WriteLine(dt8 != dt9);
+		Console.WriteLine(dt8 > dt9);
+		Console.WriteLine(dt8 < dt9);
+		Console.WriteLine(dt8 >= dt9);
+		Console.WriteLine(dt8 <= dt9);
+
+		//Convert String to DateTime
+		//A valid date and time string can be converted to a DateTime object using Parse(), ParseExact(), TryParse() and TryParseExact() methods.
+
+		//The Parse() and ParseExact() methods will throw an exception if the specified string is not a valid representation of a date and time.
+		//So, it's recommended to use TryParse() or TryParseExact() method because they return false if a string is not valid.
+		
+		var str = "5/12/2020";
+		DateTime dt10;
+
+		var isValidDate = DateTime.TryParse(str, out dt10);
+		if (isValidDate)
+			Console.WriteLine(dt10);
+		else
+			Console.WriteLine($"{str} is not a valid date string");
+	}
+}

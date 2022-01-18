@@ -1,0 +1,164 @@
+An abstract class in C# includes abstract and non-abstract methods. 
+A class is declared abstract to be an abstract class. 
+You cannot instantiate an abstract class.
+Data abstraction is the process of hiding certain details and showing only essential information to the user.
+The abstract modifier indicates the incomplete implementation. 
+The keyword abstract is used before the class or method to declare the class or method as abstract. 
+Abstraction can be achieved with either abstract classes or interfaces
+The abstract keyword is used for classes and methods
+Abstract class: is a restricted class that cannot be used to create objects(to access it, it must be inherited from another class).
+Abstract method: can only be used in an abstract class, and it does not have a body.The body is provided by the derived class (inherited from).
+
+
+using System;
+public abstract class Vehicle
+{
+    public abstract void display();
+    protected string name;
+    // abstract method
+    public abstract string Name
+    {
+        get;
+        set;
+    }
+    public abstract void calculate(double x);
+}
+
+public class Bus : Vehicle
+{
+    // provide implementation of abstract method
+    public override string Name
+    {
+        get
+        {
+            return name;
+        }
+        set
+        {
+            name = value;
+        }
+    }
+    public override void display()
+    {
+        Console.WriteLine("Bus");
+    }
+    public override void calculate(double x)
+    {
+        Console.WriteLine("SQUARE ROOT IS " + Math.Sqrt(x));
+    }
+}
+
+public class Car : Vehicle
+{
+    // provide implementation of abstract method
+    public override string Name
+    {
+        get
+        {
+            return name;
+        }
+        set
+        {
+            name = value;
+        }
+    }
+    public override void display()
+    {
+        Console.WriteLine("Car");
+    }
+    public override void calculate(double x)
+    {
+        Console.WriteLine("SQUARE is :" + (x * x));
+    }
+}
+
+public class Motorcycle : Vehicle
+{
+    // provide implementation of abstract method
+    public override string Name
+    {
+        get
+        {
+            return name;
+        }
+        set
+        {
+            name = value;
+        }
+    }
+    public override void display()
+    {
+        Console.WriteLine("Motorcycle");
+    }
+    public override void calculate(double x)
+    {
+        Console.WriteLine("CUBE is :" + (x * x * x));
+    }
+}
+
+public class MyClass
+{
+    public static void Main()
+    {
+        Vehicle v;
+        v = new Bus();
+        Console.WriteLine(v.Name = "ABC");
+        v.display();
+        v.calculate(3);
+        v = new Car();
+        Console.WriteLine(v.Name = "XYZ");
+        v.display();
+        v.calculate(3);
+        v = new Motorcycle();
+        Console.WriteLine(v.Name = "012");
+        v.display();
+        v.calculate(3);
+
+    }
+}
+------------------------------------------------------------
+using System;
+namespace AbstractDemo
+{
+    public abstract class Plan
+    {
+        protected double rate;
+        public abstract void getRate();
+        public void calculation(int units)
+        {
+            Console.Write("BILL AMOUNT FOR " + units + " UNITS is: Rs.");
+            Console.WriteLine(rate * units);
+        }
+    }
+    class CommercialPlan : Plan
+    {
+        public override void getRate()
+        {
+            rate = 5.00;
+        }
+    }
+    class DomesticlPlan : Plan
+    {
+        public override void getRate()
+        {
+            rate = 2.50;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Plan p;
+            Console.WriteLine("COMMERCIAL CONNECTION");
+            p = new CommercialPlan();
+            p.getRate();
+            p.calculation(250);
+            Console.WriteLine("DOMESTIC CONNECTION");
+            p = new DomesticlPlan();
+            p.getRate();
+            p.calculation(150);
+            Console.ReadKey();
+        }
+    }
+}
+------------------------------------------------------------------

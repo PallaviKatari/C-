@@ -1,0 +1,243 @@
+Generics allow you to define the specification of the data type of programming elements in a class or a method, 
+
+until it is actually used in the program. 
+
+In other words, generics allow you to write a class or method that can work with any data type.
+
+You write the specifications for the class or the method, with substitute parameters for data types. 
+
+When the compiler encounters a constructor for the class or a function call for the method, 
+
+it generates code to handle the specific data type. 
+
+using System;
+namespace CSharpProgram
+{
+    class GenericClass<T>
+    {
+        public GenericClass(T msg)
+        {
+            Console.WriteLine(msg);
+        }
+        public void Show<T>(T msg)
+        {
+            Console.WriteLine(msg);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            GenericClass<string> gen = new GenericClass<string>("This is generic class");
+            GenericClass<int> genI = new GenericClass<int>(101);
+            GenericClass<char> getCh = new GenericClass<char>('I');
+            gen.Show("This is generic method");
+            gen.Show(101);
+            gen.Show('I');
+        }
+    }
+}
+----------------------------------------------------------------------------
+using System;
+//namespace GenericsDemo
+//{
+//    public class ClsMain
+//    {
+//        private static void Main()
+//        {
+//            bool IsEqual = ClsCalculator.AreEqual(10, 20);
+//            bool IsEqual1 = ClsCalculator.AreEqual("ABC", "ABC");
+//            if (IsEqual)
+//            {
+//                Console.WriteLine("Both are Equal");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Both are Not Equal");
+//            }
+//            if (IsEqual1)
+//            {
+//                Console.WriteLine("Both are Equal");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Both are Not Equal");
+//            }
+//            Console.ReadKey();
+//        }
+//    }
+//    public class ClsCalculator
+//    {
+//        //Now this method can accept any data type
+//        public static bool AreEqual(object value1, object value2)//object reference
+//        {
+//            return value1 == value2;
+//        }
+//    }
+//}
+//Let’s see the problem of the above code implementation.
+//We get poor Performance due to boxing and unboxing. The object type needs to be converted to the value type.
+//Now, the AreEuqal() method is not type - safe.Now it is possible to pass a string value for the first parameter and an integer value for the second parameter. 
+
+//namespace GenericsDemo
+//{
+//    public class ClsMain
+//    {
+//        private static void Main()
+//        {
+//            bool IsEqual1 = ClsCalculator.AreEqual(10, 20);
+//            bool IsEqual2 = ClsCalculator.AreEqual("ABC", "ABC");
+//            bool IsEqual3 = ClsCalculator.AreEqual(10.5, 20.5);
+//            if (IsEqual1)
+//            {
+//                Console.WriteLine("Both are Equal");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Both are Not Equal");
+//            }
+//            if (IsEqual2)
+//            {
+//                Console.WriteLine("Both are Equal");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Both are Not Equal");
+//            }
+//            if (IsEqual3)
+//            {
+//                Console.WriteLine("Both are Equal");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Both are Not Equal");
+//            }
+//            Console.ReadKey();
+//        }
+//    }
+//    public class ClsCalculator //Method Overloading
+//    {
+//        public static bool AreEqual(int value1, int value2)
+//        {
+//            return value1 == value2;
+//        }
+//        public static bool AreEqual(string value1, string value2)
+//        {
+//            return value1 == value2;
+//        }
+//        public static bool AreEqual(double value1, double value2)
+//        {
+//            return value1 == value2;
+//        }
+//    }
+//}
+//The problem with the above code implementation is that we are repeating the same logic in each and every method.
+//However, if tomorrow we need to compare two float or two long values then again we need to create two more methods.
+
+
+//We can solve all the above problems with Generics in C#.
+//With generics, we will make the AreEqual() method to works with different types of data types.
+namespace GenericsDemo
+{
+    public class ClsMain
+    {
+        private static void Main()
+        {
+            bool IsEqual = ClsCalculator.AreEqual<int>(10, 20);
+            //bool IsEqual = ClsCalculator.AreEqual<string>("ABC", "ABC");
+            //bool IsEqual = ClsCalculator.AreEqual<double>(10, 20.5);
+            if (IsEqual)
+            {
+                Console.WriteLine("Both are Equal");
+            }
+            else
+            {
+                Console.WriteLine("Both are Not Equal");
+            }
+            Console.ReadKey();
+        }
+    }
+    public class ClsCalculator
+    {
+        public static bool AreEqual<T>(T value1, T value2)
+        {
+            return value1.Equals(value2);
+        }
+    }
+}
+------------------------------------------------------------
+using System;
+namespace GenericsDemo
+{
+    public class ClsMain
+    {
+        private static void Main()
+        {
+            bool IsEqual = ClsCalculator.AreEqual<string,int>("Hello",10);
+            //bool IsEqual = ClsCalculator.AreEqual<string>("ABC", "ABC");
+            //bool IsEqual = ClsCalculator.AreEqual<double>(10, 20.5);
+            if (IsEqual)
+            {
+                Console.WriteLine("Both are Equal");
+            }
+            else
+            {
+                Console.WriteLine("Both are Not Equal");
+            }
+            Console.ReadKey();
+        }
+    }
+    public class ClsCalculator
+    {
+        public static bool AreEqual<T,T1>(T value1, T1 value2)
+        {
+            return value1.Equals(value2);
+        }
+    }
+}
+-----------------------------------------------------------------
+using System;
+namespace GenericsDemo
+{
+    //Let us create a generic class with a generic constructor, generic member variable, generic property,
+    //and a generic method as shown below.
+
+    //MyGenericClass is a Generic Class
+    class MyGenericClass<T>
+    {
+        //Generic variable
+        //The data type is generic
+        private T genericMemberVariable;
+        //Generic Constructor
+        //Constructor accepts one parameter of Generic type
+        public MyGenericClass(T value)
+        {
+            genericMemberVariable = value;
+        }
+        //Generic Method
+        //Method accepts one Generic type Parameter
+        //Method return type also Generic
+        public T genericMethod(T genericParameter)
+        {
+            Console.WriteLine("Parameter type: {0}, value: {1}", typeof(T).ToString(), genericParameter);
+            Console.WriteLine("Return type: {0}, value: {1}", typeof(T).ToString(), genericMemberVariable);
+            return genericMemberVariable;
+        }
+        //Generic Property
+        //The data type is generic
+        public T genericProperty { get; set; }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            MyGenericClass<int> integerGenericClass = new MyGenericClass<int>(10);
+            int val = integerGenericClass.genericMethod(200);
+            Console.WriteLine(val);
+            MyGenericClass<string> stringGenericClass = new MyGenericClass<string>("hello");
+            string val1 = stringGenericClass.genericMethod("World");
+            Console.WriteLine(val1);
+            Console.ReadKey();
+        }
+    }
+}

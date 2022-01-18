@@ -1,0 +1,343 @@
+Single cast Delegate
+------------------------
+using System;
+
+namespace Delegate
+{
+    // Declare Delegate
+    public delegate void SampleDelegate(int a, int b);
+    class MathOperations
+    {
+        public void Add(int a, int b)
+        {
+            Console.WriteLine("Add Result: {0}", a + b);
+        }
+        public void Subtract(int x, int y)
+        {
+            Console.WriteLine("Subtract Result: {0}", x - y);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("****Delegate Example****");
+            MathOperations m = new MathOperations();
+            // Instantiate delegate with add method
+            SampleDelegate dlgt = m.Add;
+            dlgt(10, 90);
+            // or
+           // dlgt.Invoke(10, 90);
+
+            // Instantiate delegate with subtract method
+            dlgt = m.Subtract;
+            dlgt(10, 90);
+            Console.ReadLine();
+
+        }
+    }
+}
+------------------------------------------
+Multicast Delegates
+---------------------
+using System;
+
+namespace Delegate
+{
+    // Declare Delegate
+    public delegate void SampleDelegate(int a, int b);
+    class MathOperations
+    {
+        public void Add(int a, int b)
+        {
+            Console.WriteLine("Add Result: {0}", a + b);
+        }
+        public void Subtract(int x, int y)
+        {
+            Console.WriteLine("Subtract Result: {0}", x - y);
+        }
+        public void Multiply(int x, int y)
+        {
+            Console.WriteLine("Multiply Result: {0}", x * y);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("****Delegate Example****");
+            MathOperations m = new MathOperations();
+            // Instantiate delegate with add method
+            SampleDelegate dlgt = m.Add;
+            dlgt += m.Subtract;
+            dlgt += m.Multiply;
+            dlgt(10, 90);
+	    dlgt -= m.Subtract;
+            dlgt(10, 10);
+            Console.ReadLine();
+        }
+    }
+}
+-------------------------------------------------
+Pass Method as Parameter using Delegate
+By using delegates in c#, we can pass methods as the parameter.
+
+using System;
+
+namespace Delegate
+{
+    // Declare Delegate
+    public delegate void SampleDelegate(int a, int b);
+    class MathOperations
+    {
+        public void Add(int a, int b)
+        {
+            Console.WriteLine("Add Result: {0}", a + b);
+        }
+        public void Subtract(int x, int y)
+        {
+            Console.WriteLine("Subtract Result: {0}", x - y);
+        }
+        public void Multiply(int x, int y)
+        {
+            Console.WriteLine("Multiply Result: {0}", x * y);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("****Delegate Example****");
+            MathOperations m = new MathOperations();
+            SampleMethod(m.Add, 10, 90);
+            SampleMethod(m.Subtract, 10, 90);
+            SampleMethod(m.Multiply, 10, 90);
+            Console.ReadLine();
+        }
+        static void SampleMethod(SampleDelegate dlgt, int a, int b)
+        {
+            dlgt(a, b);
+        }
+    }
+}
+--------------------------------------------------------
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        //create list
+        List<int> nums = new List<int>();
+        //add elements to the list
+        nums.Add(56);
+        nums.Add(82);
+        nums.Add(94);
+
+        //list - foreach element
+        nums.ForEach(delegate (int num) {
+            Console.WriteLine(num);
+        });
+        //The Action (delegate function) is executed for each element in the list.
+        //The body of the function is just a single statement to print the element to console.
+    }
+}
+-----------------------------------------------------------
+using System;
+using System.Collections.Generic;
+
+delegate bool isPromote(Employee emp);
+class Employee
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public int salary { get; set; }
+    public float Experience { get; set; }
+
+
+    public static void PromoteEmp(List<Employee> EmployeeList, isPromote IsEligible)
+    {
+        foreach (Employee emp in EmployeeList)
+        {
+            if (IsEligible(emp))//logic condition  
+            {
+                Console.WriteLine(emp.Name + " Promoted");
+            }
+        }
+    }
+    public static void Main()
+    {
+        List<Employee> empl = new List<Employee>();
+        empl.Add(new Employee() { ID = 101, Name = "Aakass", salary = 35000, Experience = 3 });
+        empl.Add(new Employee() { ID = 102, Name = "Aakash", salary = 30000, Experience = 5 });
+        empl.Add(new Employee() { ID = 103, Name = "Riju", salary = 38000, Experience = 8 });
+        empl.Add(new Employee() { ID = 104, Name = "Vishal", salary = 32000, Experience = 2 });
+
+        isPromote pro = new isPromote(promote);
+        Employee.PromoteEmp(empl, pro);
+    }
+
+    public static bool promote(Employee emp)
+    {
+        if (emp.Experience >= 5)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+------------------------------------------------------------
+C# - Action Delegate
+Action is a delegate type defined in the System namespace. 
+An Action type delegate is the same as Func delegate except that the Action delegate doesn't return a value. 
+In other words, an Action delegate can be used with a method that has a void return type.
+---------------
+public delegate void Print(int val);
+
+static void ConsolePrint(int i)
+{
+    Console.WriteLine(i);
+}
+
+static void Main(string[] args)
+{           
+    Print prnt = ConsolePrint;
+    prnt(10);
+}
+-----------
+static void ConsolePrint(int i)
+{
+    Console.WriteLine(i);
+}
+
+static void Main(string[] args)
+{
+    Action<int> printActionDel = ConsolePrint;
+    printActionDel(10);
+//Action<int> printActionDel = new Action<int>(ConsolePrint);
+}
+---------------------------------------------------------------
+An Action delegate can take up to 16 input parameters of different types.
+
+An Anonymous method can also be assigned to an Action delegate
+
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Action<int> printActionDel = delegate(int i)
+		{
+			Console.WriteLine(i);
+		};
+
+   		printActionDel(10);
+	}
+}
+----------------------------------------------
+A Lambda expression also can be used with an Action delegate
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Action<int> printActionDel = i => Console.WriteLine(i);
+       
+    	printActionDel(10);
+	}
+}
+-----------------------------------------------------
+
+Points to Remember :
+Action delegate is same as func delegate except that it does not return anything. Return type must be void.
+Action delegate can have 0 to 16 input parameters.
+Action delegate can be used with anonymous methods or lambda expressions.
+
+Advantages of Action and Func Delegates
+Easy and quick to define delegates.
+Makes code short.
+Compatible type throughout the application.
+---------------------------------------------------------
+C# - Func Delegate
+C# includes built-in generic delegate types Func and Action, so that you don't need to define custom delegates manually in most cases.
+
+Func is a generic delegate included in the System namespace. It has zero or more input parameters and one out parameter. The last parameter is considered as an out parameter.
+
+The Func delegate that takes one input parameter and one out parameter is defined in the System namespace
+
+class Program
+{
+    static int Sum(int x, int y)
+    {
+        return x + y;
+    }
+
+    static void Main(string[] args)
+    {
+        Func<int,int, int> add = Sum;
+
+        int result = add(10, 10);
+
+        Console.WriteLine(result); 
+    }
+}
+------------------------------
+A Func delegate type can include 0 to 16 input parameters of different types. However, it must include an out parameter for the result. For example, the following Func delegate doesn't have any input parameter, and it includes only an out parameter.
+
+C# Func with an Anonymous Method
+You can assign an anonymous method to the Func delegate by using the delegate keyword.
+
+using System;
+
+class Program
+{
+   
+
+    static void Main(string[] args)
+    {
+        Func<int> getRandomNumber = delegate () 
+        {
+            Random rnd = new Random();
+            return rnd.Next(1, 100);
+        };
+        int a = getRandomNumber();
+        Console.WriteLine(a);
+        
+    }
+}
+
+-----------------------------------
+Func with Lambda Expression
+A Func delegate can also be used with a lambda expression
+
+using System;
+
+public class Program
+{
+	
+	public static void Main()
+	{
+		Func<int> getRandomNumber = () => new Random().Next(1, 100);
+
+
+		Func<int, int, int>  Sum  = (x, y) => x + y;
+		
+		Console.WriteLine(getRandomNumber());
+		
+		Console.WriteLine(Sum(10,20));
+		
+	}
+}
+
+Points to Remember :
+Func is built-in delegate type.
+Func delegate type must return a value.
+Func delegate type can have zero to 16 input parameters.
+Func delegate does not allow ref and out parameters.
+Func delegate type can be used with an anonymous method or lambda expression.

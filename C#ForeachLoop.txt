@@ -1,0 +1,186 @@
+using System;
+ 
+namespace Loop
+{
+    class ForLoop
+    {
+        public static void Main(string[] args)
+        {
+            char[] myArray = {'H','e','l','l','o'};
+ 
+            for(int i = 0; i < myArray.Length; i++)
+            {
+                Console.WriteLine(myArray[i]);
+            }
+        }
+    }
+}
+-------------------------
+using System;
+ 
+namespace Loop
+{
+    class ForEachLoop
+    {
+        public static void Main(string[] args)
+        {
+            char[] myArray = {'H','e','l','l','o'};
+ 
+            foreach(char ch in myArray)
+            {
+                Console.WriteLine(ch);
+            }
+        }
+    }
+}
+---------------------------------------
+using System;
+ 
+namespace Loop
+{
+    class ForEachLoop
+    {
+        public static void Main(string[] args)
+        {
+            char[] gender = {'m','f','m','m','m','f','f','m','m','f'};
+            int male = 0, female = 0;
+            foreach (char g in gender)  
+            {
+                if (g == 'm')
+                        male++;
+                else if (g =='f')
+                        female++;
+            }
+            Console.WriteLine("Number of male = {0}", male);
+            Console.WriteLine("Number of female = {0}", female);
+        }
+    }
+}
+-----------------------------------------------
+using System;
+using System.Collections.Generic;
+namespace Loop {
+  class ForEachLoop {
+    public static void Main(string[] args) {
+      var numbers = new List<int>() { 5, -8, 3, 14, 9, 17, 0, 4 };
+      int sum = 0;
+      foreach (int number in numbers) {
+        sum += number;
+      }
+      Console.WriteLine("Sum = {0}", sum);
+      Console.ReadLine();
+    }
+  }
+}
+--------------------------------------------------
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = new List<int>() { 10, 20, 30, 40, 50, 60, 70 };
+ 
+            numbers.ForEach(x => Console.WriteLine(x));
+ 
+            Console.ReadLine();
+        }
+    }
+--------------------------------------------------
+//Using of C# List ForEach with Custom Method
+class Program
+    {
+        private static void Println(string s)
+        {
+            Console.WriteLine(s);
+        }
+        static void Main(string[] args)
+        {
+            List<String> names = new List<String>();
+            names.Add("Table");
+            names.Add("Lion");
+            names.Add("River");
+            names.Add("Banana");
+ 
+            names.ForEach(Println);
+ 
+            Console.ReadLine();
+ 
+        }
+    }
+}
+-----------------------------------------------------------
+//Using of C# List ForEach with delegate
+/*
+A delegate is an object which refers to a method or you can say it is a reference type variable that can hold a reference to the methods.
+Delegates in C# are similar to the function pointer in C/C++. 
+It provides a way which tells which method is to be called when an event is triggered. 
+For example, if you click on a Button on a form (Windows Form application), the program would call a specific method.
+In simple words, it is a type that represents references to methods with a particular parameter list and return type and then calls the method in a program for execution when it is needed.*/
+class Program
+    {
+        static void Main(string[] args)
+        {
+            List<String> names = new List<String>();
+            names.Add("Table");
+            names.Add("Lion");
+            names.Add("River");
+            names.Add("Banana");
+ 
+            names.ForEach(delegate (String name)
+            {
+                Console.WriteLine(name);
+            });
+  
+            Console.ReadLine();
+ 
+        }
+    }
+---------------------------------------------------------
+//Using of C# List ForEach with Lambda
+class Program
+    {
+        static void Main(string[] args)
+        {
+            List<String> names = new List<String>();
+            names.Add("Table");
+            names.Add("Lion");
+            names.Add("River");
+            names.Add("Banana");
+ 
+            names.ForEach(x => { Console.WriteLine(x); });
+  
+            Console.ReadLine();
+        }
+    }
+ ---------------------------------------------------------------
+//Using with Action
+/*
+Action is a delegate type defined in the System namespace. 
+An Action type delegate is the same as Func delegate except that the Action delegate doesn't return a value. 
+In other words, an Action delegate can be used with a method that has a void return type.*/
+class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Action> actions = new List<Action>();
+ 
+            List<int> numbers = new List<int>() { 10, 20, 30, 40, 50, 60, 70 };
+ 
+            numbers.ForEach(number =>
+                actions.Add(() => Console.WriteLine(number)));
+ 
+            foreach (Action action in actions)
+                action();
+ 
+            Console.ReadLine();
+        }
+    }
+--------------------------------------------------
+// Array of authors - string  
+string[] authorList = new string[]  
+{ "Mahesh Chand", "Raj Kumar", "Naveen Sharma", "Allen O'neill", "Dave McCarter" };  
+// Loop through array and read all authors  
+foreach (string author in authorList )  
+{  
+Console.WriteLine(author);  
+}  
+ 

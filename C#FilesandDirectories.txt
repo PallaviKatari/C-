@@ -1,0 +1,134 @@
+using System;
+using System.IO;
+
+public class Program
+{
+    public static void Main()
+    {
+        File.WriteAllText(@".\hello.txt", "Hello World");
+
+        string content = File.ReadAllText(@".\hello.txt");
+        Console.WriteLine(content);
+        //File.Delete(@".\hello.txt");
+    }
+}
+-----------------------------------------------
+using System;
+using System.IO;
+
+public class Program
+{
+    public static void Main()
+    {
+        File.WriteAllText(@".\hello.txt", "Hello World");
+
+        foreach (string file in Directory.GetFiles(@".\"))
+        {
+            Console.WriteLine(file);
+        }
+    }
+}
+--------------------------------------------
+using System;
+using System.IO;
+
+public class Program
+{
+    public static void Main()
+    {
+        const string DirectoryPath = @".\";
+        const string FilePath = @".\HelloWorld.txt";
+
+        // Create a sub-directory 
+        Directory.CreateDirectory(Path.Combine(DirectoryPath, "sub-dir"));
+        Directory.CreateDirectory(Path.Combine(DirectoryPath, "sub-dir2"));
+
+        // Create a file
+        File.WriteAllText(FilePath, "Hello World");
+
+        FileInfo file = new FileInfo(FilePath);
+        Console.WriteLine(file.Exists);
+        Console.WriteLine(file.Name);
+        Console.WriteLine(file.LastWriteTime);
+
+        string directoryPath = Path.GetDirectoryName(FilePath);
+        DirectoryInfo directory = new DirectoryInfo(directoryPath);
+        Console.WriteLine(directory.Exists);
+        Console.WriteLine(directory.LastWriteTime);
+
+        foreach (string childDirectory in Directory.GetDirectories(directoryPath))
+        {
+            Console.WriteLine(childDirectory);
+        }
+    }
+}
+---------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace DemoApplication
+{
+    class Tutorial
+    {
+        static void Main(string[] args)
+        {
+            String path = @".\Example.txt";
+
+            if (File.Exists(path))
+            {
+                Console.WriteLine("File Exists");
+            }
+            else
+            {
+                Console.WriteLine("File does not Exists");
+            }
+            
+
+            string[] lines;
+            lines = File.ReadAllLines(path);
+
+            Console.WriteLine(lines[0]);
+            Console.WriteLine(lines[1]);
+
+            Console.WriteLine("------------------------------------------------");
+            string lines1;
+            lines1 = File.ReadAllText(path);
+            Console.WriteLine(lines1);
+
+            string dummyLines = "This is first line." + 
+                    "This is second line." +
+                    "This is third line.";
+
+            //Opens DummyFile.txt and append lines. If file is not exists then create and open.
+            File.AppendAllLines(@".\Example.txt", dummyLines.Split(Environment.NewLine.ToCharArray()).ToList<string>());
+		//File.AppendAllLines(@".\Example.txt", dummyLines.Split(".",StringSplitOptions.None));
+//File.AppendAllLines(@".\Example.txt", dummyLines.Split(" ",StringSplitOptions.None));
+            var str = from line in File.ReadLines(path)
+                               where line.StartsWith("Files") ||
+                               line.Contains("line")
+                               select line;
+            File.AppendAllLines(@".\ExampleNew.txt", str);
+
+            //Opens DummyFile.txt and append Text. If file is not exists then create and open.
+            File.AppendAllText(@".\DummyFile.txt", "This is File testing");
+
+            //Get when the file was accessed last time 
+            DateTime lastAccessTime = File.GetLastAccessTime(@".\DummyFile.txt");
+            Console.WriteLine(lastAccessTime);
+            //get when the file was written last time
+            DateTime lastWriteTime = File.GetLastWriteTime(@".\DummyFile.txt");
+            Console.WriteLine(lastWriteTime);
+            // Move file to new location
+            File.Move(@".\DummyFile.txt", @"E:\DummyFile.txt");
+
+            //String copypath = @".\ExampleNew.txt";
+
+            //File.Copy(path, copypath);
+
+            Console.ReadKey();
+        }
+    }
+}

@@ -1,0 +1,82 @@
+Literals in C# are the fixed value used by a variable that is predefined and cannot be modified during the execution of the code. These are the convenient form of constant values like other variables but their values cannot be changed. The value used by a variable can be integer, decimal, floating type or string. There are different types of literals in C# with different forms. There are various types of literals in C#.
+
+Integer Literals
+String Literals
+Character Literals
+Floating-point Literals
+Boolean Literals
+
+C# Constant Features
+The following are the important features of a constant variable in the c# programming language.
+
+ 
+
+Constant fields in c# can be created by using const keyword.
+In c#, the constant fields must be initialized during the time of declaration.
+Constant field values will be evaluated during the compile time in c#.
+Once values are assigned to constant fields, then those values must be the same throughout the application.
+
+----------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Literals
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Integer Literal
+            int x = 212;   // decimal literal
+            int y = 0145;  // octal literal
+            int z = 0x4b;  // hexadecimal literal
+            Console.WriteLine(x);
+            Console.WriteLine(y);
+            Console.WriteLine(z);
+            Console.WriteLine("---------------------------------------");
+            //Floating Literal
+            double x1 = 187.231;
+            double y1 = 0141.361;
+            double z1 = 374159E-4F;
+            Console.WriteLine(x1);
+            Console.WriteLine(y1);
+            Console.WriteLine(z1);
+            Console.WriteLine("---------------------------------------");
+            //Character Literal
+            char c = 'b';
+            char ch = '\u0071';
+            Console.WriteLine(c);
+            Console.WriteLine(ch);
+            Console.WriteLine("\nHello World\t!");
+            Console.WriteLine("---------------------------------------");
+            //String Literal
+            String s1 = "This is C# programming";
+            String s2 = @"This is C# programming";
+            Console.WriteLine(s1);
+            Console.WriteLine(s2);
+            Console.WriteLine("---------------------------------------");
+            //Boolean Literal
+            bool x2 = true;
+            bool y2 = false;
+            Console.WriteLine(x2);
+            Console.WriteLine(y2);
+            Console.WriteLine("---------------------------------------");
+            //Constant
+            const string name = "John Doe";
+            const string location = "XYZ";
+            const int age = 32;
+            // This will throw compile time error
+            //name = "ABC";
+            Console.WriteLine("Name: {0}", name);
+            Console.WriteLine("Location: {0}", location);
+            Console.WriteLine("Age: {0}", age);
+            Console.WriteLine("\nPress Enter Key to Exit..");
+
+            
+
+            Console.ReadLine();
+        }
+    }
+}

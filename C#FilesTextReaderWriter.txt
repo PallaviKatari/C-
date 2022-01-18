@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+namespace ConsoleApp2
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string file = @".\textWriter.txt";
+            // check if the file exists
+            try
+            {
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+                // create the file
+                using (TextWriter writer = File.CreateText(file))
+                {
+                    writer.WriteLine("TextWriter is an abstract class under " +
+                    "System.IO namespace. It is used to write sequential " +
+                    "series of characters into a file. It is the base class " +
+                    "of StreamWriter and StringWriter which is used to " +
+                    "write characters to streams and strings respectively. " +
+                    "By default, it is not thread safe. " +
+                    "As it is an abstract class, its object cannot be created. " +
+                    "Any class implementing TextWriter must minimally implement " +
+                    "its Write(Char) method to create its useful instance. ");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+}
+----------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+namespace ConsoleApp3
+{
+    public class Program
+    {
+        public static void Main()
+        {
+            string file = @".\textWriter.txt";
+            try
+            {
+                if (File.Exists(file))
+                {
+                    // opening the text file and reading a line
+                    using (TextReader textReader = File.OpenText(file))
+                    {
+                        Console.WriteLine(textReader.ReadLine());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("File does not exist!");
+                }
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+}

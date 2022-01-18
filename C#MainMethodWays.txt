@@ -1,0 +1,45 @@
+The Main method is the entry point of a C# console application or windows application. When the application is started, the Main method is the first method that is invoked. This Main() method is present in every executable application. Executable means any Console application, Windows desktop application or Windows service application.
+
+There can only be one entry point in a C# program. If you have more than one class that has a Main method, you must compile your program with the /main compiler option to specify which Main method to use as the entry point.
+So,
+
+The Main method is the entry point of an .exe program; it is where the program control starts and ends.
+Main is declared inside a class or struct.
+Main must be static. The enclosing class or struct is not required to be static.
+Main can either have a void or int return type.
+The Main method can be declared with or without a string[] parameter that contains command-line arguments.
+
+
+using System;
+
+class Program
+{
+    // ctrl+K+C-Shortcut for comment
+    // ctrl+K+u-Shortcut for uncomment
+    //static void Main(string[] args)
+    //{
+    //    Console.WriteLine("Hello");
+    //}
+
+
+    //static void Main()
+    //{
+    //    Console.WriteLine("Hello");
+    //}
+
+    //static int Main()
+    //{
+    //    Console.WriteLine("Hello");
+    //    return 0;
+    //}
+
+    //static int Main(string[] args)
+    //{
+    //    Console.WriteLine("Hello");
+    //    return 0;
+    //}
+
+   
+
+}
+

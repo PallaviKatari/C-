@@ -1,0 +1,147 @@
+C# allows using pointer variables in a function of code block when it is marked by the unsafe modifier. 
+
+The unsafe code or the unmanaged code is a code block that uses a pointer variable.
+
+If you are using Visual Studio IDE then you need to enable use of unsafe code in the project properties.
+
+To do this −
+
+Open project properties by double clicking the properties node in the Solution Explorer.
+
+Click on the Build tab.
+
+Select the option "Allow unsafe code".
+
+using System;
+class MyClass
+{
+    public unsafe void Method()
+    {
+        int x = 10;
+        int y = 20;
+        int* ptr1 = &x;
+        int* ptr2 = &y;
+        Console.WriteLine((int)ptr1);
+        Console.WriteLine((int)ptr2);
+        Console.WriteLine(*ptr1);
+        Console.WriteLine(*ptr2);
+    }
+}
+class MyClient
+{
+    public static void Main()
+    {
+        MyClass mc = new MyClass();
+        mc.Method();
+    }
+}
+---------------------------------------------------------------------
+using System;
+class MyClass
+{
+    public unsafe void Method()
+    {
+       
+        char x = 'a';
+        char* ptr1 = &x;
+        Console.WriteLine((int)ptr1);
+        Console.WriteLine(*ptr1);
+   
+    }
+}
+class MyClient
+{
+    public static void Main()
+    {
+        MyClass mc = new MyClass();
+        mc.Method();
+    }
+}
+------------------------------------------------------------------------
+using System;  
+class MyClass  
+{  
+    public void Method()  
+    {  
+        unsafe  
+        {  
+            int x = 10;  
+            int y = 20;  
+            int* ptr1 = &x;  
+            int* ptr2 = &y;  
+            Console.WriteLine((int)ptr1);  
+            Console.WriteLine((int)ptr2);  
+            Console.WriteLine(*ptr1);  
+            Console.WriteLine(*ptr2);  
+        }  
+    }  
+}  
+class MyClient  
+{  
+    public static void Main()  
+    {  
+        MyClass mc = new MyClass();  
+        mc.Method();  
+    }  
+}  
+-----------------------------------------------------------
+Accessing Array Elements Using a Pointer
+In C#, an array name and a pointer to a data type same as the array data, are not the same variable type. 
+
+For example, int *p and int[] p, are not same type. 
+
+You can increment the pointer variable p because it is not fixed in memory but an array address is fixed in memory, and you can't increment that.
+
+Therefore, if you need to access an array data using a pointer variable, as we traditionally do in C, or C++ ( please check: C Pointers), you need to fix the pointer using the fixed keyword.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace Pointers
+{
+class Demo
+{
+public unsafe static void Main()
+{
+int[] array = { 10, 20, 30, 40, 50 };    // declaring array
+fixed (int* ptr = array)                 // fixed for pinning the object
+/* let us have array address in pointer */
+for (int i = 0; i < 5; i++)
+{
+Console.WriteLine("Value of array[{0}]={1}", i, *(ptr + i));
+Console.WriteLine("Address of array[{0}]={1}", i, (int)(ptr + i));
+Console.ReadKey();
+}
+}
+}
+}
+-----------------------------------------------------------
+Passing Pointers as Parameters to Methods
+You can pass a pointer variable to a method as parameter. 
+
+using System;
+
+namespace UnsafeCodeApplication {
+   class TestPointer {
+      public unsafe void swap(int* p, int *q) {
+         int temp = *p;
+         *p = *q;
+         *q = temp;
+      }
+      public unsafe static void Main() {
+         TestPointer p = new TestPointer();
+         int var1 = 10;
+         int var2 = 20;
+         int* x = &var1;
+         int* y = &var2;
+         
+         Console.WriteLine("Before Swap: var1:{0}, var2: {1}", var1, var2);
+         p.swap(x, y);
+
+         Console.WriteLine("After Swap: var1:{0}, var2: {1}", var1, var2);
+         Console.ReadKey();
+      }
+   }
+}

@@ -1,0 +1,49 @@
+﻿using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void PlusMethod()//diff datatypes,no of parameters,sequence of parameters
+        {
+            Console.WriteLine("Polymorphism");
+        }
+
+        static int PlusMethod(int x)//diff datatypes,no of parameters,sequence of parameters
+        {
+            return x + x;
+        }
+        static int PlusMethod(int x, int y)//diff datatypes,no of parameters,sequence of parameters
+        {
+            return x + y;
+        }
+
+        static double PlusMethod(double x, double y)
+        {
+            return x + y;
+        }
+
+        static int PlusMethod(int x, double y)//diff datatypes,no of parameters,sequence of parameters
+        {
+            return x + (int)y;
+        }
+        static int PlusMethod(double x, int y)//diff datatypes,no of parameters,sequence of parameters
+        {
+            return (int)x + y;
+        }
+        static void Main(string[] args)
+        {
+            Program.PlusMethod();
+            int myNum = PlusMethod(8);
+            int myNum1 = PlusMethod(8, 5);
+            double myNum2 = PlusMethod(4.3, 6.26);
+            int myNum3 = PlusMethod(8, 5.8);
+            int myNum4 = PlusMethod(8.5, 5);
+            Console.WriteLine("Int: " + myNum);
+            Console.WriteLine("Int: " + myNum1);
+            Console.WriteLine("Double: " + myNum2);
+            Console.WriteLine("Int: " + myNum3);
+            Console.WriteLine("Int: " + myNum4);
+        }
+    }
+}

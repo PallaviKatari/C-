@@ -1,0 +1,129 @@
+In C#, destructors are typically used to destroy the instances or objects of a class after they are no longer needed. 
+
+They are called for classes and cannot be defined in structures. 
+
+They are invoked directly and cannot be called. 
+
+The Garbage Collector keeps the track of the objects that are not in any use and are ready for the finalization.
+
+ It invokes the Finalize () method and set the memory free to be used by other objects of a class. 
+
+You cannot predict when the Garbage Collector runs by the .NET as it is based on the best optimization algorithms.
+
+The most important part is that the destructor cannot have parameters and it cannot be used with any access modifiers in a program. 
+
+The Finalize () can be invoked as an independent call in a program. Constructors and Destructors have the same name as of class name but in Destructor, a tilde sign “~” is used before its name.
+
+You can easily take an example of borrowing a box for your temporary use and when your work is completed, you can send it back to the owner so that the other person can use it. 
+
+Program can have one finalization queue, which needs to be handled carefully when you are making a multi-threaded application in .NET framework. 
+
+This can affect the performance of an application as it takes longer time to run than Garbage Collector does.
+
+In C#, you can use also use the Dispose() method at the end of the execution of a program to release the unoccupied spaces in the memory.
+
+There can only be a one destructor in a class, which cannot be inherited or overloaded in  to any child class.  
+
+It does not have parameters or modifiers in it i.e. it has no return type and the name is exactly like the class name.
+
+Note : Execution order: Base constructor is getting called first. In general, destructors are called in the reverse order of the constructor calls. 
+
+Program of Execution order
+
+using System;
+class HelloWorld {
+  class First
+{
+    ~First()
+    {
+        System.Console.WriteLine("First's destructor is called");
+    }
+}
+class Second : First
+{
+    ~Second()
+    {
+        System.Console.WriteLine("Second's destructor is called");
+    }
+}
+class Third : Second
+{
+    ~Third()
+    {
+        System.Console.WriteLine("Third's destructor is called");
+    }
+}
+class TestDestructors
+{
+    static void Main()
+    {
+        Third t = new Third();
+    }
+}
+}
+------------------------------------------------
+Destructor implicitly calls the Finalize method, they are technically the same. Dispose is available with objects that implement the IDisposable interface.
+
+You may see : Destructors C# - MSDN
+
+The destructor implicitly calls Finalize on the base class of the object.
+
+Example from the same link:
+
+class Car
+{
+    ~Car()  // destructor
+    {
+        // cleanup statements...
+    }
+}
+The Destructor's code is implicitly translated to the following code:
+
+protected override void Finalize()
+{
+    try
+    {
+        // Cleanup statements...
+    }
+    finally
+    {
+        base.Finalize();
+    }
+}
+------------------------------------------------------------
+Working of dispose() Function
+Working of dispose() function is as follows:
+
+To free and reset the resources that are unmanaged like connections to the databases,
+files, etc., and to perform a cleanup of the memory, we make use of a function called dispose of () function in C#.
+The dispose() function in C# must implement the IDisposable interface.
+The dispose of () function in C# must be called by the user explicitly and not by the garbage collector.
+The cost with respect to performance while using dispose of () method is null because the dispose of () method 
+cleans up the memory immediately which optimizes the memory and hence usage of this function to clean the unmanaged resources 
+like files and connections to the databases is very much recommended.
+
+using System;
+using System.IO;
+//a class called demonstratingclass is defined and it implements the IDidposable interface
+public class demonstratingclass : IDisposable
+{
+    //the dispose() method is defined to to perform the release of the required resources
+    public void Dispose()
+    {
+        Console.WriteLine("The dispose() function has been called and the resources have been released!");
+    }
+}
+//another class called demofordispose is defined
+public class demofordispose
+{
+    //main method is called
+    public static void Main()
+    {
+        //an instance of the demonstratingclass is created
+        demonstratingclass result = new demonstratingclass();
+        //the dispose() method is called on the instance of the demonstratingclass to release it from the memory
+        result.Dispose();
+    }
+}
+
+

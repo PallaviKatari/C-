@@ -1,0 +1,85 @@
+using System;
+using System.IO;
+namespace Program
+{
+    class Check
+    {
+        //calling the main method
+        static void Main(string[] args)
+        {
+            //creating an instance of stringwriter method
+            StringWriter strng = new StringWriter();
+            //writing data using stringwriter instance
+            strng.WriteLine("Hello, welcome to StringReader class");
+            //closing the instance of stringwriter
+            strng.Close();
+            // Creating an instance of stringreader to which the stringwriter instance is passed
+            StringReader read = new StringReader(strng.ToString());
+            // data written using stringwriter is read using stringreader
+            while (read.Peek() > -1)
+            {
+                Console.WriteLine(read.ReadLine());
+            }
+        }
+    }
+}
+----------------------------------------
+using System;
+using System.IO;
+using System.Text;
+namespace Program
+{
+    class Check
+    {
+        //calling the main method
+        static void Main(string[] args)
+        {
+            //Creating an instance of StringBuilder class
+            var readall = new StringBuilder();
+            //appending all the single statements into one through the instance of StringBuilder class
+            readall.AppendLine("Welcome to StringReader class.");
+            readall.AppendLine("Lets understand ReadToEnd() method.");
+            readall.AppendLine("This method displays all the statements right from the beginning.");
+            //creating an instance of StringReader class
+            var read = new StringReader(readall.ToString());
+            //calling the ReadToEnd() method using the instance of StringReader class
+            string tt = read.ReadToEnd();
+            Console.WriteLine(tt);
+        }
+    }
+}
+--------------------------------------------------
+using System;
+using System.IO;
+namespace Program
+{
+    class Check
+    {
+        //Calling the main method
+        static void Main(string[] args)
+        {
+            //A string variable holding a string of characters is defined
+            var tt = "Welcome to StringReader class.";
+            //an instance of the stringreader class is created
+            var read = new StringReader(tt);
+            //a counter is declared and initialized to zero
+            int count1 = 0;
+            //the occurrence of the character to be identified from the statement is assigned to a character variable
+            char ch = 'c';
+            //an integer variable is declared
+            int x;
+            //Read() method is called and checked if the control has not reached the end of the string or if the string do not exist
+            while ((x = read.Read()) != -1)
+            {
+                char ct = (char)x;
+                //if the character whose occurrence must be counted is same as the character in the statement while traversing through the statement, the counter is incremented by one
+                if (ct.Equals(ch))
+                {
+                    count1++;
+                }
+            }
+            //finally the number of occurrences of the specified character is displayed
+            Console.WriteLine($"The number of '{ch}' characters in the given statement is {count1}");
+        }
+    }
+}

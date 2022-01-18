@@ -1,0 +1,40 @@
+﻿ using System;
+
+namespace Inheritance //Single,multi-level,Hierarchical inheritance
+{
+     class Parent  // base class (parent) ,sealed class cannot be inherited
+    {
+        public string eyecolor = "brown";  
+        public void feature()              
+        {
+            Console.WriteLine("Parent class:Brown eye");
+        }
+    }
+
+    class Child : Parent // derived class (child)
+    {
+        public string height = "5.8ft"; 
+    }
+
+    class Child1: Parent //Hierarchical inheritance
+    {
+        public string weight = "55kg";
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create a ob object
+            Child ob = new Child();
+            Child1 ob1 = new Child1();
+
+            // Call the feature() method (From the Parent class) on the ob object
+            ob.feature();
+            ob1.feature();
+
+            Console.WriteLine(ob.eyecolor + " " + ob.height);
+            Console.WriteLine(ob1.eyecolor + " " + ob1.weight);
+        }
+    }
+}

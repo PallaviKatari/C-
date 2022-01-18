@@ -1,0 +1,51 @@
+static void Main(string[] args)
+        {
+           for (int i = 1; i < 10; i++)
+           {
+              if (i == 5)
+              {
+                 goto endloop;
+              }
+              Console.WriteLine("i value: {0}", i);
+           }
+           endloop: Console.WriteLine("The end");
+           Console.WriteLine("Press Enter Key to Exit..");
+           Console.ReadLine();
+        }
+------------------------------------------------------
+static void Main(string[] args)
+         {
+             int i = 3, j = 0;
+             switch (i)
+             {
+                 case 1:
+                    j += 20;
+                    Console.WriteLine("j value is {0}",j);
+                    break;
+                 case 2:
+                    j += 5;
+                    goto case 1;
+                 case 3:
+                    j += 30;
+                    goto case 1;
+                 default:
+                    Console.WriteLine("Not Known");
+                    break;
+             }
+             Console.WriteLine("Press Enter Key to Exit..");
+             Console.ReadLine();
+         }
+---------------------------------------------------
+static void Main(string[] args)
+        {
+            int i = 10, j = 20, result = 0;
+            result = SumofNumbers(i, j);
+            Console.WriteLine("Result: {0}", result);
+            Console.WriteLine("Press Enter Key to Exit..");
+            Console.ReadLine();
+        }
+        public static int SumofNumbers(int a, int b)
+        {
+             int x = a + b;
+             return x;
+        }

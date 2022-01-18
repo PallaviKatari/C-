@@ -1,0 +1,240 @@
+Example 1
+------------
+
+// C# program to illustrate the enums
+// with their default values
+using System;
+namespace ConsoleApplication1 {
+ 
+// making an enumerator 'month'
+enum month
+{
+ 
+    // following are the data members
+    jan,
+    feb,
+    mar,
+    apr,
+    may
+ 
+}
+ 
+class Program {
+     
+    // Main Method
+    static void Main(string[] args)
+    {
+         
+        // getting the integer values of data members..
+        Console.WriteLine("The value of jan in month " +
+                          "enum is " + (int)month.jan);
+        Console.WriteLine("The value of feb in month " +
+                          "enum is " + (int)month.feb);
+        Console.WriteLine("The value of mar in month " +
+                          "enum is " + (int)month.mar);
+        Console.WriteLine("The value of apr in month " +
+                          "enum is " + (int)month.apr);
+        Console.WriteLine("The value of may in month " +
+                          "enum is " + (int)month.may);
+    }
+}
+}
+
+Example 2
+-------------
+
+// C# program to illustrate the Enums
+using System;
+namespace ConsoleApplication2 {
+     
+class Perimeter {
+     
+    // declaring enum
+    public enum shapes
+    {
+        circle,
+        square
+    }
+ 
+    public void peri(int val, shapes s1)
+    {
+         
+        // checking for shape to be circle
+        if (s1 == 0)
+        {
+             
+            // Output the circumference
+            Console.WriteLine("Circumference of the circle is " +
+                                                  2 * 3.14 * val);
+        }
+         
+        else
+        {
+ 
+            // else output the perimeter of the square
+            Console.WriteLine("Perimeter of the square is " +
+                                                     4 * val);
+        }
+    }
+}
+ 
+class Program {
+     
+    // Main Method
+    static void Main(string[] args)
+    {
+ 
+        Perimeter a1 = new Perimeter();
+        a1.peri(3, Perimeter.shapes.circle);
+        a1.peri(4, Perimeter.shapes.square);
+ 
+    }
+}
+}
+
+Example 3
+-------------
+// C# program to illustrate the enum
+// data member Initialisation
+using System;
+namespace ConsoleApplication3 {
+     
+// enum declaration
+enum days {
+     
+    // enum data members
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday,
+    saturday,
+    sunday
+}
+ 
+// enum declaration
+enum color {
+     
+    // enum data members
+    Red,
+    Yellow,
+    Blue,
+     
+    // assigning value yellow(1) + 5
+    Green = Yellow + 5,
+    Brown,
+     
+    // assigning value Green(6) + 3
+    Black = Green + 3
+ 
+}
+ 
+class Program {
+     
+    // Main Method
+    static void Main(string[] args)
+    {
+ 
+        Console.WriteLine("Demonstrating the difference "+
+                      "between Special Initialisation" +
+                 "cases and non-initialisation cases\n\n");
+ 
+        // first of all non-initialized enum
+        // 'days' will be displayed
+        // as mentioned already, the first
+        // member is initialized to 0
+        // hence the output will numbers
+        // from 0 1 2 3 4 5 6
+ 
+        Console.WriteLine("Value of Monday is " +
+                                    (int)days.monday);
+        Console.WriteLine("Value of Tuesday is " +
+                                    (int)days.tuesday);
+        Console.WriteLine("Value of Wednesday is " +
+                                    (int)days.wednesday);
+        Console.WriteLine("Value of Thursday is " +
+                                    (int)days.thursday);
+        Console.WriteLine("Value of Friday is " +
+                                    (int)days.friday);
+        Console.WriteLine("Value of Saturday is " +
+                                    (int)days.saturday);
+        Console.WriteLine("Value of Sunday is " +
+                                    (int)days.sunday);
+ 
+        // Now the use of special initialisation
+        // cases is demonstrated as expected Red
+        // will be assigned 0 value similarly
+        // yellow will be 1 and blue will be 2
+        // however, green will be assigned the
+        // value 1+5=6 similarly is the case
+        // with brown and black
+ 
+        Console.WriteLine("\n\nColor Enum");
+ 
+        Console.WriteLine("Value of Red Color is " +
+                                       (int)color.Red);
+        Console.WriteLine("Value of Yellow Color is " +
+                                     (int)color.Yellow);
+        Console.WriteLine("Value of Blue Color is " +
+                                      (int)color.Blue);
+        Console.WriteLine("Value of Green Color is " +
+                                      (int)color.Green);
+        Console.WriteLine("Value of Brown Color is " +
+                                      (int)color.Brown);
+        Console.WriteLine("Value of Black Color is " +
+                                      (int)color.Black);
+
+Console.ReadKey(); //Readline() or Read()
+    }
+}
+}
+--------------------------------------------------------------
+using System;
+
+namespace Enumeration
+{
+    //An enum is a special "class" that represents a group of constants (unchangeable/read-only variables).
+
+    //To create an enum, use the enum keyword (instead of class or interface), and separate the enum items with a comma
+    class Program
+    {
+        enum Months
+        {
+            January,    // 0
+            February,   // 1
+            March=10,      // 2
+            April,      // 3
+            May,        // 4
+            June,       // 5
+            July        // 6
+        }
+
+        enum Level
+        {
+            Low,
+            Medium,
+            High
+        }
+
+        static void Main(string[] args)
+        {
+            int myNum = (int)Months.April;
+            Console.WriteLine(myNum);
+            Level myVar = Level.Medium;
+            switch (myVar)
+            {
+                case Level.Low:
+                    Console.WriteLine("Low level");
+                    break;
+                case Level.Medium:
+                    Console.WriteLine("Medium level");
+                    break;
+                case Level.High:
+                    Console.WriteLine("High level");
+                    break;
+            }
+            Console.ReadLine();
+        }
+    }
+}
+

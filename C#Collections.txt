@@ -1,0 +1,414 @@
+Overview of Collections in C#
+-------------------------------------------
+Collections can be defined as a type of class used in C# for dynamic memory allocation for storing 
+and fetching of the contents of the class, and can be used for performing multiple operations. 
+
+In C#, the collections work in the form of 
+‘System.Collections.Generic classes’, 
+‘System.Collections.Concurrent classes’ and 
+‘System.Collections classes’. 
+
+In terms of storage patterns, collections replicate the data structure of an Array, 
+
+and the only difference is, unlike arrays, collections doesn’t need to be defined with the size required.
+
+There are 3 ways to work with collections which are follow
+
+System.Collections.Generic classes
+System.Collections.Concurrent classes
+System.Collections classes
+
+There are many ways we can use the collections. Collections are similar to an array.  
+Here we don’t need to define the size beforehand unlike array.
+--------------------------------------------------------------------
+
+Example #1 – ArrayList(It is a collection of System.Collections. It allows to hold the data of multiple data types and as the data is added, it expands automatically.)
+--------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace ArrayListExample
+{
+class Program
+{
+static void Main(string[] args)
+{
+var data = new ArrayList();   //arraylist collection
+data.Add("Demo");             // add element
+data.Add(1);
+data.Add(5);
+data.Add(26);
+data.Add(56.4);
+data.Add(32);
+data.Remove(5);              // remove element
+foreach (object obj in data)   // iteration
+{
+Console.WriteLine(obj);
+Console.ReadLine();
+}
+}
+}
+}
+----------------------------------------------------------
+Example# 2 – List operation(It is a collection of System.Collections.Generic namespace.)
+----------------------------------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Collections
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var value = new List<string>();       // list collection
+            value.Add("Cricket");                       // add element
+            value.Add("Football");
+            value.Add("Volleyball");
+            value.Add("Hockey");
+            value.Add("Basketball");
+            value.Add("Tennis");
+            value.Remove("Football");              // remove element
+            value.Remove("Tennis");
+            value.Insert(3, "Badminton");         // insert element
+            foreach (string st in value)
+            {
+                Console.WriteLine(st);
+                Console.ReadLine();
+            }
+        }
+    }
+}
+--------------------------------------------------------------
+Example# 3 : Sorted List(It consists of key and values in a collection.)
+-------------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Collections
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var value = new SortedList<string, int>();            // sortedlist collection
+            value.Add("java", 3);                                               // add element
+            value.Add("javascript", 4);
+            value.Add("c-sharp", 5);
+            value.Add("dotnet", 25);
+            value.Add("python", 27);
+            value.Add("typescript", 57);
+            value.Clear();
+            foreach (var pair in value)
+            {
+                Console.WriteLine(pair);
+                Console.ReadLine();
+            }
+        }
+    }
+}
+-------------------------------------------------------
+Example# 4 : Linked list(It basically allows the sequential access of the elements.)
+-----------------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Collections
+{
+class Program
+{
+static void Main(string[] args)
+{
+var value = new LinkedList<int>();             // linkedlist collection
+value.AddLast(13);          // add element
+value.AddLast(33);
+value.AddLast(23);
+value.AddLast(51);
+value.AddLast(60);
+value.AddFirst(4);
+value.AddFirst(6);
+LinkedListNode<int> node = value.Find(51);         // find the node
+value.AddBefore(node, 40);
+foreach (int num in value)
+{
+Console.WriteLine(num);
+Console.ReadLine();
+}
+}
+}
+}
+--------------------------------------------------
+Example# 5 – Dictionary(It consists of unique pair of keys and values.)
+------------------------------------------------------------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Collections
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var pair = new Dictionary<string, string>();           // dictionary collection
+            pair.Add("in", "India");                                                // add keys and values
+            pair.Add("af", "Africa");
+            pair.Add("us", "United States");
+            pair.Add("ja", "Japan");
+            pair.Add("ch", "China");
+            pair.Add("ca", "Canada");
+            Console.WriteLine("Keys present in the dictionary:");
+            var key = new List<string>(pair.Keys);
+            foreach (string k in key)
+            {
+                Console.WriteLine("{0}", k);
+            }
+            Console.WriteLine("Values present in the dictionary:");
+            var value = new List<string>(pair.Values);
+            foreach (string val in value)
+            {
+                Console.WriteLine("{0}", val);
+            }
+            Console.ReadLine();
+        }
+    }
+}
+-----------------------------------------------------------------------
+Example# 6 – Stack(It is based on the Last-In-First-Out structure. The last element of the queue is the first one to be removed.)
+-----------------------------------------------------------------------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Collections
+{
+class Program
+{
+static void Main(string[] args)
+{
+var value = new Stack<int>();                          // stack collection
+value.Push(10);                                                    // adding the element
+value.Push(40);
+value.Push(33);
+value.Push(62);
+value.Push(48);
+value.Push(21);
+value.Push(31);
+Console.WriteLine(value.Pop());
+Console.WriteLine(value.Peek());
+Console.WriteLine();
+foreach (int item in value)
+{
+Console.WriteLine(item);
+Console.ReadLine();
+}
+}
+}
+}
+---------------------------------------------------------------------------------
+Example# 7 – Queue(It is based on First-In-First-Out structure. The first element of the queue is the first one to be removed.)
+---------------------------------------------------------------------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Collections
+{
+class Program
+{static void Main(string[] args)
+{
+var value = new Queue<string>();                // queue collection
+value.Enqueue("Item 1");                               // add element
+value.Enqueue("Item 2");
+value.Enqueue("Item 3");
+value.Enqueue("Item 4");
+value.Enqueue("Item 5");
+value.Enqueue("Item 6");
+value.Enqueue("Item 7");
+Console.WriteLine(value.Dequeue());
+Console.WriteLine(value.Peek());
+Console.WriteLine();
+foreach (string num in value)
+{
+Console.WriteLine(num);
+Console.ReadLine();
+}
+}
+}
+}
+------------------------------------------------------
+Example# 8 – Hashtable class
+--------------------------------------------------------
+The Hashtable class represents a collection of key-and-value pairs that are organized based on the hash code of the key. 
+It uses the key to access the elements in the collection.
+A hash table is used when you need to access elements by using key, and you can identify a useful key value. 
+Each item in the hash table has a key/value pair. The key is used to access the items in the collection.
+-----------------------------------------------------------
+using System;
+using System.Collections;
+
+namespace CollectionsApplication
+{
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            Hashtable ht = new Hashtable();
+
+            ht.Add("001", "Aakash");
+            ht.Add("002", "Aakass Elango");
+            ht.Add("003", "Riju");
+            ht.Add("004", "Vishal");
+            ht.Add("005", "Nevetha");
+            ht.Add("006", "Naveen");
+            ht.Add("007", "Lalith");
+
+            if (ht.ContainsValue("XYZ"))
+            {
+                Console.WriteLine("This student name is already in the list");
+            }
+            else
+            {
+                ht.Add("008", "XYZ");
+            }
+
+            // Get a collection of the keys.
+            //The ICollection interface in C# defines the size, enumerators, and synchronization methods for all nongeneric collections. 
+            //It is the base interface for classes in the System.Collections namespace.
+            ICollection key = ht.Keys;
+
+            foreach (string k in key)
+            {
+                Console.WriteLine(k + ": " + ht[k]);
+            }
+            Console.ReadKey();
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------
+Example# 9 – BitArray class
+---------------------------------------------
+The BitArray class manages a compact array of bit values, which are represented as Booleans, 
+where true indicates that the bit is on (1) and false indicates the bit is off (0).
+It is used when you need to store the bits but do not know the number of bits in advance. 
+You can access items from the BitArray collection by using an integer index, which starts from zero.
+--------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections;
+
+namespace CollectionsApplication
+{
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            //creating two  bit arrays of size 8
+            BitArray ba1 = new BitArray(4);
+            BitArray ba2 = new BitArray(4);
+            byte[] a = { 0 };
+            byte[] b = { 15 };
+
+            //storing the values 0, and 15 into the bit arrays
+            ba1 = new BitArray(a);
+            ba2 = new BitArray(b);
+
+            //content of ba1
+            Console.WriteLine("Bit array ba1: 0");
+
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write("{0} ", ba1[i]);
+            }
+            Console.WriteLine("----------------------------------------------------------------");
+
+            //content of ba2
+            Console.WriteLine("Bit array ba2: 15");
+
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write("{0} ", ba2[i]);
+            }
+            Console.WriteLine("----------------------------------------------------------------");
+            BitArray ba3 = new BitArray(4);
+            ba3 = ba1.And(ba2);
+
+            //content of ba3
+            Console.WriteLine("Bit array ba3 after AND operation: 0");
+
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write("{0} ", ba3[i]);
+            }
+            Console.WriteLine("----------------------------------------------------------------");
+            ba3 = ba1.Or(ba2);
+
+            //content of ba3
+            Console.WriteLine("Bit array ba3 after OR operation: 15");
+
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write("{0} ", ba3[i]);
+            }
+            Console.WriteLine("----------------------------------------------------------------");
+
+            Console.ReadKey();
+        }
+    }
+}
+----------------------------------------------------
+The .NET Framework 4 brought the System.Collections.Concurrent namespace.
+This has several collection classes that are thread-safe and scalable. 
+These collections are called concurrent collections because they can be accessed by multiple threads at a time.
+Provides several thread-safe collection classes that should be used in place 
+of the corresponding types in the System.Collections and 
+System.Collections.Generic namespaces whenever multiple threads are accessing the collection concurrently.
+However, access to elements of a collection object through extension methods or through explicit 
+interface implementations are not guaranteed to be thread-safe and may need to be synchronized by the caller.
+using System;
+using System.Collections.Concurrent;
+
+class Demo
+{
+    static void Main ()
+    {
+        ConcurrentStack<int> s = new ConcurrentStack<int>();
+
+        s.Push(50);
+        s.Push(100);
+        s.Push(150);
+        s.Push(200);
+        s.Push(250);
+        s.Push(300);
+   
+        if (s.IsEmpty)
+        {
+           Console.WriteLine("The stack is empty!");
+        }
+            
+        else {
+           Console.WriteLine("The stack isn't empty");
+        }
+    }
+}

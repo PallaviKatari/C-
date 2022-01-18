@@ -1,0 +1,33 @@
+﻿using System;
+
+namespace ConsoleApp3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("LOOPING STATEMENTS");
+            Console.WriteLine("WHILE");
+            int i = 1;
+            while(i<10)
+            {
+                Console.WriteLine("hello:" + i);
+                i++;
+            }
+            int j = 1;
+            Console.WriteLine("DO WHILE");
+            do
+            {
+                Console.WriteLine("hello:" + j);
+                j++;
+            } while (j < 0);
+            Console.WriteLine("FOR");
+            for(int k=0;k<10;k++)
+            {
+                Console.WriteLine("FOR :" + k);
+                //break;
+               // continue;
+            }
+        }
+    }
+}

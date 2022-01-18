@@ -1,0 +1,321 @@
+using System;
+namespace ThreadingDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Method1();
+            Method2();
+            Method3();
+            Console.Read();
+        }
+        static void Method1()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method1 :" + i);
+            }
+        }
+        
+        static void Method2()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method2 :" + i);
+            }
+        }
+        static void Method3()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method3 :" + i);
+            }
+        }
+    }
+}
+----
+using System.Threading;
+using System;
+namespace ThreadingDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Method1();
+            Method2();
+            Method3();
+            Console.Read();
+        }
+        static void Method1()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method1 :" + i);
+            }
+        }
+        static void Method2()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method2 :" + i);
+                if (i == 3)
+                {
+                    Console.WriteLine("Performing the Database Operation Started");
+                    //Sleep for 10 seconds
+                    Thread.Sleep(10000);
+                    Console.WriteLine("Performing the Database Operation Completed");
+                }
+            }
+        }
+        static void Method3()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method3 :" + i);
+            }
+        }
+    }
+}
+---
+using System.Threading;
+using System;
+namespace ThreadingDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Main Thread Started");
+            //Creating Threads
+            Thread t1 = new Thread(Method1)
+            {
+                Name = "Thread1"
+            };
+            Thread t2 = new Thread(Method2)
+            {
+                Name = "Thread2"
+            };
+            Thread t3 = new Thread(Method3)
+            {
+                Name = "Thread3"
+            };
+            //Executing the methods
+            t1.Start();
+            t2.Start();
+            t3.Start();
+            Console.WriteLine("Main Thread Ended");
+            Console.Read();
+        }
+        static void Method1()
+        {
+            Console.WriteLine("Method1 Started using " + Thread.CurrentThread.Name);
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method1 :" + i);
+            }
+            Console.WriteLine("Method1 Ended using " + Thread.CurrentThread.Name);
+        }
+        static void Method2()
+        {
+            Console.WriteLine("Method2 Started using " + Thread.CurrentThread.Name);
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method2 :" + i);
+                if (i == 3)
+                {
+                    Console.WriteLine("Performing the Database Operation Started");
+                    //Sleep for 10 seconds
+                    Thread.Sleep(10000);
+                    Console.WriteLine("Performing the Database Operation Completed");
+                }
+            }
+            Console.WriteLine("Method2 Ended using " + Thread.CurrentThread.Name);
+        }
+        static void Method3()
+        {
+            Console.WriteLine("Method3 Started using " + Thread.CurrentThread.Name);
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine("Method3 :" + i);
+            }
+            Console.WriteLine("Method3 Ended using " + Thread.CurrentThread.Name);
+        }
+    }
+}
+---------------------------------------------------------------------------
+using System;
+using System.Threading;
+
+namespace MultithreadingApplication {
+   class MainThreadProgram {
+      static void Main(string[] args) {
+         Thread th = Thread.CurrentThread;
+         th.Name = "MainThread";
+         
+         Console.WriteLine("This is {0}", th.Name);
+         Console.ReadKey();
+      }
+   }
+}
+----------------------------------------------------------
+Creating Threads:
+
+Threads are created by extending the Thread class. 
+The extended Thread class then calls the Start() method to begin the child thread execution.
+
+using System;
+using System.Threading;
+
+namespace MultithreadingApplication {
+   class ThreadCreationProgram {
+      public static void CallToChildThread() {
+         Console.WriteLine("Child thread starts");
+      }
+      static void Main(string[] args) {
+         ThreadStart childref = new ThreadStart(CallToChildThread);
+         Console.WriteLine("In Main: Creating the Child thread");
+         Thread childThread = new Thread(childref);
+         childThread.Start();
+         Console.ReadKey();
+      }
+   }
+}
+-----------------------------------------------------------
+Managing Threads:
+
+The Thread class provides various methods for managing threads.
+The following example demonstrates the use of the sleep() method for making a 
+thread pause for a specific period of time.
+
+using System;
+using System.Threading;
+
+namespace MultithreadingApplication {
+   class ThreadCreationProgram {
+      public static void CallToChildThread() {
+         Console.WriteLine("Child thread starts");
+         
+         // the thread is paused for 5000 milliseconds
+         int sleepfor = 5000; 
+         
+         Console.WriteLine("Child Thread Paused for {0} seconds", sleepfor / 1000);
+         Thread.Sleep(sleepfor);
+         Console.WriteLine("Child thread resumes");
+      }
+      
+      static void Main(string[] args) {
+         ThreadStart childref = new ThreadStart(CallToChildThread);
+         Console.WriteLine("In Main: Creating the Child thread");
+         
+         Thread childThread = new Thread(childref);
+         childThread.Start();
+         Console.ReadKey();
+      }
+   }
+}
+------------------------------------------------------
+Destroying Threads:
+
+The Abort() method is used for destroying threads.
+The runtime aborts the thread by throwing a ThreadAbortException. 
+This exception cannot be caught, the control is sent to the finally block, if any.
+
+using System;
+using System.Threading;
+
+namespace MultithreadingApplication {
+   class ThreadCreationProgram {
+      public static void CallToChildThread() {
+         try {
+            Console.WriteLine("Child thread starts");
+            
+            // do some work, like counting to 10
+            for (int counter = 0; counter <= 10; counter++) {
+               Thread.Sleep(500);
+               Console.WriteLine(counter);
+            }
+            
+            Console.WriteLine("Child Thread Completed");
+         } catch (ThreadAbortException e) {
+            Console.WriteLine("Thread Abort Exception");
+         } finally {
+            Console.WriteLine("Couldn't catch the Thread Exception");
+         }
+      }
+      static void Main(string[] args) {
+         ThreadStart childref = new ThreadStart(CallToChildThread);
+         Console.WriteLine("In Main: Creating the Child thread");
+         
+         Thread childThread = new Thread(childref);
+         childThread.Start();
+         
+         //stop the main thread for some time
+         Thread.Sleep(2000);
+         
+         //now abort the child
+         Console.WriteLine("In Main: Aborting the Child thread");
+         
+         childThread.Abort();
+//REFER:https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.abort?view=net-6.0
+         Console.ReadKey();
+      }
+   }
+}
+--------------------------------------------------------
+THREADPOOL
+--------------
+using System;
+using System.Diagnostics;
+using System.Threading;
+namespace ThreadPoolApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                MethodWithThread();
+                MethodWithThreadPool();
+            }
+            Stopwatch stopwatch = new Stopwatch();
+            Console.WriteLine("Execution using Thread");
+            stopwatch.Start();
+            MethodWithThread();
+            stopwatch.Stop();
+            Console.WriteLine("Time consumed by MethodWithThread is : " +
+                                 stopwatch.ElapsedTicks.ToString());
+            
+            stopwatch.Reset();
+            Console.WriteLine("Execution using Thread Pool");
+            stopwatch.Start();
+            MethodWithThreadPool();
+            stopwatch.Stop();
+            Console.WriteLine("Time consumed by MethodWithThreadPool is : " +
+                                 stopwatch.ElapsedTicks.ToString());
+            
+            Console.Read();
+        }
+        public static void MethodWithThread()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Thread thread = new Thread(Test);
+            }
+        }
+        public static void MethodWithThreadPool()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                ThreadPool.QueueUserWorkItem(new WaitCallback(Test));
+            }           
+        }
+        public static void Test(object obj)
+        {
+        }       
+    }
+}
+
+

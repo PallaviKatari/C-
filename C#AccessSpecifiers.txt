@@ -1,0 +1,277 @@
+using System;
+namespace AccessSpecifierDemo
+{
+    public class Customer
+    {
+        #region Private Fields
+        private int _id;
+        #endregion
+
+        #region Public Fields
+        public string _firstName;
+        public string _lastName;
+        #endregion
+
+        #region Properties
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value; }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; }
+        }
+        #endregion
+
+        #region Methods
+        public string GetFullName()
+        {
+            return this._firstName + " " + this._lastName;
+        }
+        #endregion
+    }
+    public class MainClass
+    {
+        private static void Main()
+        {
+            Customer CustomerInstance = new Customer();
+            Console.WriteLine(CustomerInstance.Id = 101);
+            CustomerInstance.FirstName = "John";
+            CustomerInstance.LastName = "Doe";
+            string name = CustomerInstance.GetFullName();
+            Console.WriteLine(name);
+            // Compiler Error: 'Customer._id' is inaccessible due to its protection level
+            //CustomerInstance._id = 101;
+        }
+    }
+}
+--------------------------------------------------------------------
+using System;
+
+namespace InheritanceApplication
+{
+
+    class Shape
+    {
+
+        
+        protected int width;
+        protected int height;
+    }
+
+    // Derived class
+    class Rectangle : Shape
+    {
+
+        public int getArea()
+        {
+            width = 10;
+            height = 10;
+            return (width * height);
+        }
+    }
+
+    class RectangleTester
+    {
+
+        static void Main(string[] args)
+        {
+            Rectangle Rect = new Rectangle();
+
+            
+
+            // Print the area of the object.
+            Console.WriteLine("Total area: {0}", Rect.getArea());
+            Console.ReadKey();
+        }
+    }
+}
+------------------------------------------------------------------------
+using System;
+namespace AccessSpecifierDemo
+{
+    public class Customer
+    {
+        protected int ID = 101;
+        public void PrintID()
+         //internal void PrintID()
+        //protected void PrintID()
+        {
+            //Protected member ID is accessible with in Customer class
+            Console.WriteLine(this.ID);
+        }
+    }
+    public class CorporateCustomer : Customer
+    {
+        public void PrintCustomerID()
+        {
+            CorporateCustomer corporateCustomerInstance = new CorporateCustomer();
+            // Can access the base class protected instance member using the derived class object
+            Console.WriteLine(corporateCustomerInstance.ID);
+            // Can access the base class protected instance member using this or base keyword
+            Console.WriteLine(this.ID);
+            Console.WriteLine(base.ID);
+        }
+    }
+    public class RetailCustomer
+    {
+        public static void Main()
+        {
+            Customer c = new Customer();
+            c.PrintID();
+            sample();
+            CorporateCustomer cc = new CorporateCustomer();
+            cc.PrintCustomerID();
+            
+        }
+
+        public static void sample()
+        {
+            Customer c = new Customer();
+            c.PrintID();
+
+        }
+    }
+}
+----------------------------------------------------------------------
+INTERNAL ACCESS SPECIFIER
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Internal_Access_Specifier
+{
+    public class access
+    {
+        // String Variable declared as internal
+        internal string name;
+        public void print()
+        {
+            Console.WriteLine("\nMy name is " + name);
+        }
+    }
+
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            access ac = new access();
+            Console.Write("Enter your name:\t");
+            // Accepting value in internal variable
+            ac.name = Console.ReadLine();
+            ac.print();
+            Console.ReadLine();
+        }
+    }
+}
+
+//Same Console App
+using System.Text;
+using System.Threading.Tasks;
+using Internal_Access_Specifier;
+
+namespace ConsoleApp1
+{
+    public class Class1
+    {
+        Program p = new Program();
+    }
+
+}
+
+//Different Console App
+using System;
+using ConsoleApp1;
+using Internal_Access_Specifier;
+
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+                      
+            access a = new access();
+            a.print();
+            //cannot access internal string name;
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
+
+---------------------------------------------------------
+Static members
+
+using System;
+
+namespace StaticVarApplication {
+   class StaticVar {
+      public static int num;
+
+      public void count() {
+         num++;
+      }
+
+      public int getNum() {
+         return num;
+      }
+   }
+
+   class StaticTester {
+      static void Main(string[] args) {
+         StaticVar s1 = new StaticVar();
+         StaticVar s2 = new StaticVar();
+
+         s1.count();
+         s1.count();
+         s1.count();
+
+         s2.count();
+         s2.count();
+         s2.count();
+
+         Console.WriteLine("Variable num for s1: {0}", s1.getNum());
+         Console.WriteLine("Variable num for s2: {0}", s2.getNum());
+         Console.ReadKey();
+      }
+   }
+}
+---------------------------------------------------------
+using System;
+using ConsoleApp1;
+using Internal_Access_Specifier;
+
+
+namespace ConsoleApp2
+{
+    public static class sample
+    {
+        public static int a = 10; // static class can contain only static variables and static methods
+        public static void sum()
+        {
+            a += a;
+            Console.WriteLine(a);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(sample.a);
+            sample.sum();
+
+
+
+        }
+    }
+}

@@ -1,0 +1,250 @@
+
+using System;
+
+public class MyClass
+{
+    [Obsolete("Don't use OldMethod, use NewMethod instead", true)]
+
+    static void OldMethod()
+    {
+        Console.WriteLine("It is the old method");
+    }
+    static void NewMethod()
+    {
+        Console.WriteLine("It is the new method");
+    }
+    public static void Main()
+    {
+        //When you try to compile the program, the compiler gives an error message stating −
+
+        //Don't use OldMethod, use NewMethod instead
+        OldMethod();
+    }
+}
+------------------------------------------------------------
+// C# program to demonstrate CLSCompliantAttribute
+// giving a warning message
+using System;
+
+// CLSCompliantAttribute applied to entire assembly
+[assembly: CLSCompliant(true)]
+
+public class Demo
+{
+    public uint z;
+}
+
+class GFG2
+{
+
+    // Main Method
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("CLSCompliant");
+    }
+
+}
+----------------------------------------------------------
+// C# program to demonstrate FlagsAttribute
+using System;
+
+class GDemo
+{
+
+    // Enum defined without FlagsAttribute.
+    enum Colours
+    {
+        Red = 1,
+        Blue = 2,
+        Pink = 4,
+        Green = 8
+    }
+
+    // Enum defined with FlagsAttribute.
+    [Flags]
+    enum ColoursFlags
+    {
+        Red = 1,
+        Blue = 2,
+        Pink = 4,
+        Green = 8
+    }
+
+    // Main Method
+    public static void Main(string[] args)
+    {
+        Console.WriteLine((Colours.Red | Colours.Blue).ToString());//Bitwise OR
+        Console.WriteLine((ColoursFlags.Red | ColoursFlags.Blue).ToString());
+    }
+}
+-------------------------------------------------------------
+// C# program to demonstrate ObsoleteAttribute
+using System;
+
+class GFG
+{
+
+    // The method1() is marked as obsolete
+    [Obsolete("method1 is obsolete", true)]
+    static void method1()
+    {
+        Console.WriteLine("This is method1");
+    }
+
+    static void method2()
+    {
+        Console.WriteLine("This is method2");
+    }
+
+    public static void Main(string[] args)
+    {
+        method1(); // Compiler error as method1() is obsolete
+        method2();
+    }
+}
+-------------------------------
+//The AttributeUsage attribute enables you to control:
+//- Which program elements attribute may be applied to. ...
+//- Whether an attribute can be applied to a single program element multiple times.
+//- Whether attributes are inherited by derived classes.
+
+//Here is an example:
+using System;
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, inherited = true)]
+public class MyClass : Attribute // or any other class that somehow implements Attribute
+{
+	//Do stuff
+}
+-----------------------------------
+// C# program to demonstrate Custom Attributes
+using System;
+
+// AttributeUsage specifies the usage
+// of InformationAttribute
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor |
+                        AttributeTargets.Method, AllowMultiple = true)]
+
+// InformationAttribute is a custom attribute class
+// that is derived from Attribute class
+class InformationAttribute : Attribute
+{
+    public string InformationString { get; set; }
+}
+
+// InformationAttribute is used in student class
+[Information(InformationString = "Class")]
+public class student
+{
+
+    private int rollno;
+    private string name;
+
+    [Information(InformationString = "Constructor")]
+    public student(int rollno, string name)
+    {
+        this.rollno = rollno;
+        this.name = name;
+    }
+
+    [Information(InformationString = "Method")]
+    public void display()
+    {
+        Console.WriteLine("Roll Number: {0}", rollno);
+        Console.WriteLine("Name: {0}", name);
+    }
+}
+
+// Driver Class
+public class GFG
+{
+
+    // Main Method
+    public static void Main(string[] args)
+    {
+        student s = new student(1001, "John Doe");
+        s.display();
+    }
+}
+----------------------------------------------
+Conditional attribute
+By using the Conditional attribute, we are following a scenario that if a particular condition 
+is true, the user will have access to that specific method. 
+Suppose you wanted your specific method to run only if Internet Explorer is found 
+on the system. Applying this type of security on a method was not easy in the past. 
+Now, it is possible by applying conditional attributes.
+
+Suppose you want a method to run if program is in Debug mode.
+
+[Conditional(.DEBUG.)]
+public static void Help(String str)
+{
+   Console.WriteLine(str);
+}
+
+If one calls this method in Main(), it will run only if the program is in Debug mode. 
+If you turn it off in the release mode, it will not run.
+-----------------------------------------------------
+DLL Import
+Before DotNet, if one wanted to access the core Windows API, 
+he could add a reference and use the library provided by Windows SDK. 
+In DotNet, if we want to access those core features of DotNet, we use DllImport. 
+Component DLLs aren’t accessed this way. They are accessed by making a reference to them. 
+Normal DLLs are accessed by using the DllImport attribute.
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        [DllImport("User32.dll")]
+        public static extern int MessageBox(int h, string m, string c, int type);
+
+        static void Main(string[] args)
+        {
+            string myString = "The Wonderful World of C# Programming";
+            Console.WriteLine(myString);
+
+            MessageBox(0, "The Wonderful World of C# Programming", "My Message Box", 0);
+        }
+    }
+}
+------------------------------------------------
+How to use attributes attached to a code element
+Attributes act as metadata. 
+Without some outward force, they won't actually do anything.
+
+To find and act on attributes, Reflection is generally needed. 
+We won't cover Reflection in-depth in this tutorial, 
+but the basic idea is that Reflection allows you to write code in C# that examines other code.
+
+For instance, you can use Reflection to get information about a 
+class(add using System.Reflection; at the head of your code)
+
+TypeInfo typeInfo = typeof(MyClass).GetTypeInfo();
+Console.WriteLine("The assembly qualified name of MyClass is " + typeInfo.AssemblyQualifiedName);
+
+That will print out something like: The assembly qualified name 
+of MyClass is ConsoleApplication.MyClass, attributes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+
+Once you have a TypeInfo object (or a MemberInfo, FieldInfo, etc), 
+you can use the GetCustomAttributes method. This will return a collection of Attribute objects. 
+
+using System;
+using System.Reflection;
+
+class Beeper
+{
+   
+   public static void Main()
+    {
+        TypeInfo typeInfo = typeof(Beeper).GetTypeInfo();
+        Console.WriteLine("The assembly qualified name of MyClass is " + typeInfo.AssemblyQualifiedName);
+    }
+}
+
+

@@ -1,0 +1,299 @@
+// C# program to demonstrate the
+// Explicit Type Conversion
+using System;
+namespace Casting{
+  
+class GFG {
+  
+        // Main Method
+        public static void Main(String []args)
+        {
+            double d = 765.12;
+  
+            // Explicit Type Casting
+            int i = (int)d;
+  
+            // Display Result
+            Console.WriteLine("Value of i is " +i);
+        }
+}
+}
+----------------------------------------
+// C# program to demonstrate the
+// Implicit Type Conversion
+using System;
+namespace Casting{
+  
+class GFG {
+  
+        // Main Method
+        public static void Main(String []args)
+        {
+            int i = 57; 
+              
+            // automatic type conversion
+            long l = i; 
+               
+            // automatic type conversion
+            float f = l;
+              
+            // Display Result
+            Console.WriteLine("Int value "  +i);
+            Console.WriteLine("Long value "  +l);
+            Console.WriteLine("Float value "  +f);
+        }
+}
+}
+-----------------------------------------------
+
+// C# program to demonstrate the
+// Built- In Type Conversion Methods
+using System;
+namespace Casting{
+  
+class GFG {
+  
+        // Main Method
+        public static void Main(String []args)
+        {
+            int i = 12;
+            double d = 765.12;
+            float f = 56.123F;
+              
+            // Using Built- In Type Conversion
+            // Methods & Displaying Result
+            Console.WriteLine(Convert.ToString(f));
+            Console.WriteLine(Convert.ToInt32(d));
+            Console.WriteLine(Convert.ToUInt32(f));
+            Console.WriteLine(Convert.ToDouble(i));
+            Console.WriteLine("Hello World!!!");
+        }
+}
+}
+-----------------------------------------------
+using System;
+
+namespace MyApplication {
+  class Program {
+    static void Main(string[] args) {
+      int numInt = 500;
+
+      // get type of numInt
+      Type n = numInt.GetType();
+
+      // Implicit Conversion
+      double numDouble = numInt;
+
+      // get type of numDouble
+      Type n1 = numDouble.GetType();
+
+      // Value before conversion
+      Console.WriteLine("numInt value: "+numInt);
+      Console.WriteLine("numInt Type: " + n);
+
+      // Value after conversion
+      Console.WriteLine("numDouble value: "+numDouble);
+      Console.WriteLine("numDouble Type: " + n1);
+      Console.ReadLine();
+    }
+  }
+}
+---------------------------------------------------
+using System;
+
+namespace MyApplication {
+  class Program {
+    static void Main(string[] args) {
+
+      double numDouble = 1.23;
+
+      // Explicit casting
+      int numInt = (int) numDouble;  
+
+      // Value before conversion
+      Console.WriteLine("Original double Value: "+numDouble);
+
+      // Value before conversion
+      Console.WriteLine("Converted int Value: "+numInt);
+      Console.ReadLine();
+    }
+  }
+}
+--------------------------------------------------
+Convert.ToInt32 returns 0 for null, while int.Parse throws a ArgumentNullException.
+
+using System;
+using System.Collections.Generic;
+
+
+
+class Program
+{
+	static void Main(string[] args)
+	{
+
+        string n = "100";
+
+        // converting string to int type
+        int a1 = int.Parse(n);
+        Type t = a1.GetType();
+        Console.WriteLine("Original string value: " + n);
+        Console.WriteLine("Converted int value: " + a1);
+        Console.WriteLine("Converted Type of int value: " + t);
+        Console.WriteLine("-------------------------------------");
+        int res,res1, a, b;
+        bool c;
+        string myStr = "200";
+       
+        res = Convert.ToInt32(myStr);
+        a = Convert.ToInt32(null);
+
+       res1 = int.Parse(myStr);
+       // b = int.Parse(null);
+	//public static bool TryParse(string str, out char result)
+        c = int.TryParse(myStr,out b);//c = int.TryParse(myStr,out b);
+
+        Console.WriteLine("String in a numeric representation: " + res);
+        Console.WriteLine("String in a numeric representation: " + res1);
+        Console.WriteLine("Convert: a=" + a);
+        //Console.WriteLine("Parse: b=" + b);
+        Console.WriteLine("TryParse: c=" + c);
+        Console.ReadLine();
+    }
+}
+
+
+---------------------------------------------------------------
+
+
+using System;
+namespace Conversion
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            // create int variable
+            int num = 100;
+            Console.WriteLine("int value: " + num);
+            Console.WriteLine("--------------------------------------------------------");
+
+            // convert int to string
+            string str = Convert.ToString(num);
+            Type t1 = str.GetType();
+            Console.WriteLine("Datatype of string value: " + t1);
+            Console.WriteLine("string value: " + str);
+            Console.WriteLine("--------------------------------------------------------");
+
+            // convert int to Double
+            Double doubleNum = Convert.ToDouble(num);
+            Type t2 = doubleNum.GetType();
+            Console.WriteLine("Datatype of Double value: " + t2);
+            Console.WriteLine("Double value: " + doubleNum);
+            Console.WriteLine("--------------------------------------------------------");
+            // create string variable
+            string str1 = "99.99";
+            Console.WriteLine("Original string value: " + str1);
+            Console.WriteLine("--------------------------------------------------------");
+            // convert string to double
+            Double newDouble = Convert.ToDouble(str1);
+            Type t22 = newDouble.GetType();
+            Console.WriteLine("Datatype of Double value: " + t22);
+            Console.WriteLine("Converted Double value: " + newDouble);
+            Console.WriteLine("--------------------------------------------------------");
+            // create double variable
+            double n = 88.9;
+            Console.WriteLine("Original double value: " + n);
+            Console.WriteLine("--------------------------------------------------------");
+            // converting double to string 
+            string newString = Convert.ToString(n);
+            Type t3 = newString.GetType();
+            Console.WriteLine("Datatype of string value: " + t3);
+            Console.WriteLine("Converted string value: " + newString);
+            Console.WriteLine("--------------------------------------------------------");
+            // create int variables
+            int num1 = 0;
+            int num2 = 1;
+          
+            // convert int to Boolean
+            Boolean bool1 = Convert.ToBoolean(num1);
+            Boolean bool2 = Convert.ToBoolean(num2);
+            Type t4 = bool1.GetType();
+            Console.WriteLine("Datatype of Boolean value: " + t4);
+            Console.WriteLine("Boolean value of 0 is: " + bool1);
+            Console.WriteLine("--------------------------------------------------------");
+            Type t5 = bool2.GetType();
+            Console.WriteLine("Datatype of Boolean value: " + t5);
+            Console.WriteLine("Boolean value of 1 is: " + bool2);
+
+            Console.ReadLine();
+        }
+    }
+}
+-----------------------------------------------------------
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		//Example: Convert string to int using TryParse()
+		string numberStr = "123456as";
+		int number;
+
+		bool isParsable = Int32.TryParse(numberStr, out number);
+		if (isParsable)
+			Console.WriteLine(number);
+		else
+			Console.WriteLine("Could not be parsed.");
+		//Example: Convert string to int using TryParse()
+		string numberStr1 = "123456";
+		int number1;
+
+		bool isParsable1 = Int32.TryParse(numberStr1, out number1);
+
+		if (isParsable1)
+			Console.WriteLine(number1);
+		else
+			Console.WriteLine("Could not be parsed.");
+	}
+}
+-----------------------------------------------------------------
+Key difference between TryParse() and Parse() :
+When you convert a string type to primitive data type. TryParse() returns converted value along with a boolean value as true/false, stating that conversion is successful or not.  However, Parse() method throws exception, if there is a conversion failure.
+While using Parse(), Proper try catch block should be implemented to catch if any exception occurs during conversion.
+
+using System;
+
+namespace TryParseAndParse
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                int number;
+                //bool result = Int32.TryParse("001234", out number);
+                //we pass a string variable as "Hello World"  and try to convert it to int type using TryParse()  method.
+                bool result = Int32.TryParse("Hello World", out number);
+                //because string type "Hello World"  cannot be parsed to type int .
+                int result1 = Int32.Parse("Hello World");
+                if (result)
+                {
+                    Console.WriteLine("Coversion successful");
+                    Console.WriteLine("Parsed Value : {0}", number);
+                    
+                }
+                else
+                    Console.WriteLine("Coversion failed");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+        }
+    }
+}

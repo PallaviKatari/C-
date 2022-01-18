@@ -1,0 +1,194 @@
+﻿Constructor plays a very important role in Object-Oriented Programming. 
+Let us understand the role of constructor in C# with the help of the following points:
+
+A constructor is a special method present inside a class responsible for initializing the class variables.
+Its name is the same as the class name.
+It automatically gets executed when we create an instance of the class.
+A constructor does not return any value.
+If we do not define a constructor, an implicit constructor is always provided by the class, which is called the default constructor.
+------------------------------------------------------------------------
+
+using System;
+
+namespace ConsoleApp2
+{
+    class Course
+    {
+        public string ss1;
+        public string ss2;
+        public int duration;
+        public int uid;
+        public string uname;
+
+        public Course()
+        {
+            Console.WriteLine("Student Details");
+        }
+        public Course(string name,int id)
+        {
+            uid = id;
+            uname = name;
+        }
+
+        public Course(string session1, string session2, int cduration)
+        {
+            ss1 = session1;
+            ss2 = session2;
+            duration = cduration;
+        }
+        ~Course()
+        {
+            Console.WriteLine("Destructor invoked");
+        }
+
+        static void Main(string[] args)
+        {
+            Course c0 = new Course();
+            Course c = new Course("John",101);
+            Course c1 = new Course("C#", "ASP", 15);
+            Console.WriteLine("--------------------");
+            Console.WriteLine(c.uid+" "+c.uname);
+            Console.WriteLine(c1.ss1 + " and " + c1.ss2 + " " + c1.duration+" days");
+            Console.ReadLine();
+        }
+        
+    }
+}
+-------------------------------------------------------------------------
+The constructor, which copy variables of another object and create a new object, is called a copy constructor. 
+In C#, the copy constructor is also a parameterized constructor. 
+A parameterized constructor is a constructor that contains a parameter of the same class type. 
+The copy constructor is useful whenever we want to initialize a new instance to an existing instance’s values. 
+So, the Copy constructor is a constructor that basically sends the values of one object to another object without 
+affecting an existing object’s values.
+
+class Demo
+{
+//variables
+string name;
+int age;
+public Demo(string name, int age) //parameterized constructor
+{
+this.name = name;
+this.age = age;
+}
+public void getData()
+{
+Console.WriteLine("Name is:{0}", name);
+Console.WriteLine("Age is:{0}", age);
+}
+}
+class Program
+{
+// Main method
+static void Main(string[] args)
+{
+Demo obj = new Demo("John",20);
+obj.getData();
+Console.ReadLine();
+}
+}
+----------------------------------------------------------
+class Demo
+{
+string name;
+int age;
+public Demo(string name, int age) //paramertrized constructor
+{
+this.name = name;
+this.age = age;
+}
+public Demo(Demo d) //copy constructor
+{
+this.name = d.name;
+this.age = d.age;
+}
+public void getData()
+{
+Console.WriteLine("Name is:{0}", name);
+Console.WriteLine("Age is:{0}", age);
+}
+}
+class Program
+{
+//main method
+static void Main(string[] args){
+Demo obj = new Demo("John",20);
+obj.getData();
+Demo obj1 = new Demo(obj); //new object
+obj1.getData();
+Console.ReadLine();
+}
+}
+---------------------------------------------------------
+
+Rules for Copy Constructor in C#
+The name of the copy constructor should be the same as the class name.
+Another constructor is required with a copy constructor to copy an object.
+There is no return type of copy constructor.
+The copy constructor cannot be final, static and abstract.
+-----------------------------------------------------------------------------
+A static constructor is a constructor declared using a static modifier. 
+It is the first block of code executed in a class. 
+With that, a static constructor executes only once in the life cycle of class.
+
+using System;
+namespace DemoApplication{
+   public class Program{
+      static void Main(string[] args){
+         Car user = new Car();
+         Car user1 = new Car();
+         Console.ReadLine();
+      }
+   }
+//static constructor is called only once.
+   public class Car{
+      static Car(){
+         Console.WriteLine("Static constructor called");
+      }
+      public Car(){
+         Console.WriteLine("Default constructor called");
+      }
+   }
+}
+-----------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Difference
+{
+    class Demo
+    {
+        static int val1;
+        int val2;
+
+        static Demo()
+        {
+            Console.WriteLine("This is Static Constructor");
+            val1 = 70;
+        }
+
+        public Demo(int val3)
+        {
+            Console.WriteLine("This is Instance Constructor");
+            val2 = val3;
+        }
+
+        private void show()
+        {
+            Console.WriteLine("First Value = " + val1);
+            Console.WriteLine("Second Value = " + val2);
+        }
+
+        static void Main(string[] args)
+        {
+            Demo d1 = new Demo(110);
+            Demo d2 = new Demo(200);
+            d1.show();
+            d2.show();
+            Console.ReadKey();
+        }
+    }
+}

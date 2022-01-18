@@ -1,0 +1,48 @@
+﻿using System;
+
+namespace Encapsulation
+{
+    class Person //default internal access apecifier (internal,public,private,protected)
+    {
+        private string name; // field
+        string email; //default private
+
+
+        public string Name   // property
+        {
+            //private variables can only be accessed within the same class (an outside class has no access to it).
+            //However, sometimes we need to access them - and it can be done with properties.
+
+            //A property is like a combination of a variable and a method, and it has two methods: a get and a set method
+
+            get { return name; }
+            set { name = value; }
+
+        }
+
+        public Person() //Constructor (no return type)
+        {
+            email = "abc@xyz.com";
+            Console.WriteLine(email);
+        }
+        public Person(out int a)
+        {
+            a = 10;
+
+
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Person myObj = new Person();
+            Person my2 = new Person(out int x);
+            myObj.Name = "Cathy";
+           // myObj.email = "abc@abc.com";
+            Console.WriteLine(myObj.Name);
+            Console.Write(x);
+        }
+    }
+}
