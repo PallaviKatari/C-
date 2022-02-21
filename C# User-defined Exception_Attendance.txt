@@ -1,0 +1,48 @@
+using System;
+
+namespace UserDefinedException
+{
+    class TestAttendance
+    {
+        static void Main(string[] args)
+        {
+            Attendance f = new Attendance();
+            try
+            {
+                f.showResult();//METHOD CALL
+            }
+            catch (AttendanceTestFailedException e)
+            {
+                Console.WriteLine("User defined exception: {0}", e.Message);
+            }
+            Console.ReadKey();
+        }
+    }
+}
+//STEP 1
+public class AttendanceTestFailedException : Exception
+{
+    //CONSTRUCTOR->DISPLAY ERROR MESSAGE
+    public AttendanceTestFailedException(string message) : base(message)
+    {
+    }
+}
+public class Attendance
+{
+    int total;
+    
+    public void showResult()
+    {
+        Console.WriteLine("How many are present today?");
+        total = int.Parse(Console.ReadLine());//19
+
+        if (total < 20) //19<20
+        {
+            throw (new AttendanceTestFailedException("Some are absent"));
+        }
+        else
+        {
+            Console.WriteLine("All present");
+        }
+    }
+}
